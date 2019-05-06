@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Button Soccer</title>
+</head>
+
+<body>
+    <canvas id="gamecanvas" width="300" height="400" style="border:1px solid #000000;"></canvas>
+    <br>
+    <span id="display1"></span><br>
+    <span id="display2"></span><br>
+    <span id="display3"></span><br>
+</body>
+<script>
+    var gamecanvas = document.getElementById("gamecanvas");
+    var display1 = document.getElementById("display1");
+    var display2 = document.getElementById("display2");
+    var display3 = document.getElementById("display3");
+
+    var player_radius = 20;
+    var players_x = 100;
+    var players_y = 75;
+    var booster = 5;
+</script>
+<script src="swipe.js"></script>
+<script src="player.js"></script>
+<script src="main.js"></script>
+
+</html>
