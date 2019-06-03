@@ -23,11 +23,19 @@
     </div>
 
     <div id="game_div" style="display:none;"></div>
+
+    <div id="images_loader" style="display:none;">
+        <img id="ball_1" width="50" height="50" src="images/ball1/1.png" alt="Ball 1">
+        <img id="ball_2" width="50" height="50" src="images/ball1/2.png" alt="Ball 1">
+        <img id="ball_3" width="50" height="50" src="images/ball1/3.png" alt="Ball 1">
+        <img id="ball_4" width="50" height="50" src="images/ball1/4.png" alt="Ball 1">
+    </div>
 </body>
 
 <script>
     let gamecanvas;
     let players = [];
+    let ball;
     let gamesession = false;
     let ctx; //drawing context
     let swipe_listener;
