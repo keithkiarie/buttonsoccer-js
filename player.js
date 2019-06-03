@@ -27,7 +27,7 @@ function Ball(x_position, y_position, dimensions, identity) {
 }
 
 function create_ball() {
-    ball = new Ball(gamecanvas.width / 2, gamecanvas.height / 2, ball_dimensions, ball_id);
+    ball = new Ball((gamecanvas.width / 2) - ball_dimensions / 2, (gamecanvas.height / 2) - ball_dimensions / 2, ball_dimensions, ball_id);
 }
 
 function create_players(number) {
@@ -104,12 +104,7 @@ function player_movement() {
             //check for contact with other player
             for (let i = 0; i < players_number; i++) {
                 for (let j = i + 1; j < players_number; j++) {
-                    if ((players[i].x + players[i].radius >= players[j].x - players[j].radius - 0.1) &&
-                        (players[i].x - players[i].radius <= players[j].x + players[j].radius + 0.1) &&
-                        (players[i].y + players[i].radius >= players[j].y - players[j].radius - 0.1) &&
-                        (players[i].y - players[i].radius <= players[j].y + players[j].radius + 0.1)) {
-
-
+                    if (Math.sqrt(Math.pow(players[i].x - players[j].x, 2) + Math.pow(players[i].y - players[j].y, 2)) <= players[i].radius + players[j].radius + 1) {
                         player_collision(players[i], players[j]);
                         break;
                     }
@@ -119,12 +114,17 @@ function player_movement() {
 
             //check for player contact with ball
             for (let i = 0; i < players_number; i++) {
-                if ((players[i].x + players[i].radius >= ball.x - 0.1) &&
-                    (players[i].x - players[i].radius <= ball.x + ball.dimensions) &&
-                    (players[i].y + players[i].radius >= ball.y - 0.1) &&
-                    (players[i].y - players[i].radius <= ball.y + ball.dimensions)) {
+                if (Math.sqrt(Math.pow(players[i].x - (ball.x + ball.dimensions / 2), 2) + Math.pow(players[i].y - (ball.y + ball.dimensions / 2), 2)) < players[i].radius + (ball.dimensions / 2)) {
 
-                    player_collision(players[i], ball);
+                    //create a holder because the ball's x is not exactly the midpoint
+                    let temp = ball;
+                    temp.x += temp.dimensions / 2;
+                    temp.y += temp.dimensions / 2;
+
+                    player_collision(players[i], temp);
+                    temp.x -= temp.dimensions / 2;
+                    temp.y -= temp.dimensions / 2;
+                    ball = temp;
                     break;
                 }
             }
