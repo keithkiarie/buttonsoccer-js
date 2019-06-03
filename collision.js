@@ -1,12 +1,12 @@
 const player_collision = (ballA, ballB) => {
-    let vxDist = ballA.unit_x - ballB.unit_x;
-    let vyDist = ballA.unit_y - ballB.unit_y;
+    let unit_dx = ballA.unit_x - ballB.unit_x;
+    let unit_dy = ballA.unit_y - ballB.unit_y;
 
-    let xDist = ballB.x - ballA.x;
-    let yDist = ballB.y - ballA.y;
+    let dx = ballB.x - ballA.x;
+    let dy = ballB.y - ballA.y;
 
-    if (vxDist * xDist + vyDist * yDist >= 0) {
-        let angle = -Math.atan2(yDist, xDist);
+    if (unit_dx * dx + unit_dy * dy >= 0) {
+        let angle = -Math.atan2(dy, dx);
         let u1 = change_angles(ballA.unit_x, ballA.unit_y, angle);
         let u2 = change_angles(ballB.unit_x, ballB.unit_y, angle);
         let v1 = {
@@ -18,12 +18,12 @@ const player_collision = (ballA, ballB) => {
             y: u2.y
         };
 
-        let vFinal1 = change_angles(v1.x, v1.y, -angle);
-        let vFinal2 = change_angles(v2.x, v2.y, -angle);
-        ballA.unit_x = vFinal1.x;
-        ballA.unit_y = vFinal1.y;
-        ballB.unit_x = vFinal2.x;
-        ballB.unit_y = vFinal2.y;
+        let a_new_unit = change_angles(v1.x, v1.y, -angle);
+        let b_new_unit = change_angles(v2.x, v2.y, -angle);
+        ballA.unit_x = a_new_unit.x;
+        ballA.unit_y = a_new_unit.y;
+        ballB.unit_x = b_new_unit.x;
+        ballB.unit_y = b_new_unit.y;
     }
 }
 
