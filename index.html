@@ -3,13 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Button Soccer</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden
+        }
+    </style>
 </head>
 
 <body>
-    <canvas id="gamecanvas" width="300" height="400" style="border:1px solid #000000;"></canvas>
+    <canvas id="gamecanvas" width="300" height="500" style="border:1px solid #000000;"></canvas>
     <br>
     <span id="display1"></span><br>
     <span id="display2"></span><br>
@@ -21,13 +29,17 @@
     var display2 = document.getElementById("display2");
     var display3 = document.getElementById("display3");
 
+
     var player_radius = 20;
     var players_x = 100;
     var players_y = 75;
     var booster = 5;
+
+    var players = [];
 </script>
 <script src="swipe.js"></script>
 <script src="player.js"></script>
+<script src="collision.js"></script>
 <script src="main.js"></script>
 
 </html>

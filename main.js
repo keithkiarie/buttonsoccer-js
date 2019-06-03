@@ -24,27 +24,32 @@ drawer = () => {
     }
 }
 
-var players = [];
 //create players
 for (let i = 0; i < 6; i++) {
     switch (i) {
         case 0:
-            players.push(new Player(50, 50, player_radius, 1));
+            players.push(new Player(50, 50, player_radius, 1, i));
+            players[i].move();
             break;
         case 1:
-            players.push(new Player(100, 50, player_radius, 1));
+            players.push(new Player(100, 50, player_radius, 1, i));
+            players[i].move();
             break;
         case 2:
-            players.push(new Player(50, 100, player_radius, 1));
+            players.push(new Player(50, 100, player_radius, 1, i));
+            players[i].move();
             break;
         case 3:
-            players.push(new Player(100, 100, player_radius, 2));
+            players.push(new Player(100, 100, player_radius, 2, i));
+            players[i].move();
             break;
         case 4:
-            players.push(new Player(50, 150, player_radius, 2));
+            players.push(new Player(50, 150, player_radius, 2, i));
+            players[i].move();
             break;
         case 5:
-            players.push(new Player(100, 150, player_radius, 2));
+            players.push(new Player(100, 150, player_radius, 2, i));
+            players[i].move();
     }
     drawer();
 }
