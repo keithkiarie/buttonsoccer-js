@@ -3,8 +3,8 @@ onswipe = (transformation, first_x, first_y) => {
     for (let i = 0; i < players.length; i++) {
         //check if this player is the one being swiped
         if (first_x >= players[i].x - players[i].radius && first_y >= players[i].y - players[i].radius && first_x <= players[i].x + players[i].radius && first_y <= players[i].y + players[i].radius) {
-            players[i].unit_x = speed * transformation.x / transformation.duration;
-            players[i].unit_y = speed * transformation.y / transformation.duration;
+            players[i].unit_x = transformation.x / transformation.duration;
+            players[i].unit_y = transformation.y / transformation.duration;
         }
     }
 }
