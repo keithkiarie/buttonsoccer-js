@@ -1,55 +1,53 @@
-var swipe_listener = new Swipe_Listener(gamecanvas);
-var ctx = gamecanvas.getContext("2d");
+function create_canvas() {
+    gamecanvas = document.createElement("canvas");
+    gamecanvas.id = "gamecanvas";
+    gamecanvas.style.border = "1px solid #000000";
 
+    gamecanvas.width = window.innerWidth;
+    gamecanvas.height = window.innerHeight;
+    ctx = gamecanvas.getContext("2d");
 
-onswipe = (transformation, first_x, first_y) => {
-    //loop through all playing objects
-    for (let i = 0; i < players.length; i++) {
-        //check if this player is the one being swiped
-        if (first_x >= players[i].x - players[i].radius && first_y >= players[i].y - players[i].radius && first_x <= players[i].x + players[i].radius && first_y <= players[i].y + players[i].radius) {
-            players[i].unit_x = transformation.x / transformation.duration;
-            players[i].unit_y = transformation.y / transformation.duration;
-
-            players[i].move();
-        }
-    }
+    document.getElementById("game_div").appendChild(gamecanvas);
+    swipe_listener = new Swipe_Listener(gamecanvas);
 }
 
-drawer = () => {
+
+
+function circle_drawer() {
     ctx.clearRect(0, 0, gamecanvas.width, gamecanvas.height);
     for (let i = 0; i < players.length; i++) {
         ctx.beginPath();
         ctx.arc(players[i].x, players[i].y, players[i].radius, 0, 2 * Math.PI);
         ctx.stroke();
+        ctx.fillStyle = players[i].color;
+        ctx.fill();
     }
 }
 
-//create players
-for (let i = 0; i < 6; i++) {
-    switch (i) {
-        case 0:
-            players.push(new Player(50, 50, player_radius, 1, i));
-            players[i].move();
-            break;
-        case 1:
-            players.push(new Player(100, 50, player_radius, 1, i));
-            players[i].move();
-            break;
-        case 2:
-            players.push(new Player(50, 100, player_radius, 1, i));
-            players[i].move();
-            break;
-        case 3:
-            players.push(new Player(100, 100, player_radius, 2, i));
-            players[i].move();
-            break;
-        case 4:
-            players.push(new Player(50, 150, player_radius, 2, i));
-            players[i].move();
-            break;
-        case 5:
-            players.push(new Player(100, 150, player_radius, 2, i));
-            players[i].move();
+function start_game() {
+    change_display("game_div");
+    create_canvas();
+    create_players(players_number);
+    gamesession = true;
+    requestAnimationFrame(gameplay);
+}
+
+function gameplay() {
+    player_movement();
+
+    if (gamesession) {
+        requestAnimationFrame(gameplay);
     }
-    drawer();
+}
+
+function change_display(div_to_display) {
+    let divs = ["main_menu", "game_div"];
+
+    divs.forEach(div => {
+        if (div == div_to_display) {
+            document.getElementById(div_to_display).style.display = "block";
+        } else {
+            document.getElementById(div).style.display = "none";
+        }
+    });
 }

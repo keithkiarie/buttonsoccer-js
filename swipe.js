@@ -1,3 +1,15 @@
+onswipe = (transformation, first_x, first_y) => {
+    //loop through all playing objects
+    for (let i = 0; i < players.length; i++) {
+        //check if this player is the one being swiped
+        if (first_x >= players[i].x - players[i].radius && first_y >= players[i].y - players[i].radius && first_x <= players[i].x + players[i].radius && first_y <= players[i].y + players[i].radius) {
+            players[i].unit_x = speed * transformation.x / transformation.duration;
+            players[i].unit_y = speed * transformation.y / transformation.duration;
+        }
+    }
+}
+
+
 function Swipe_Listener(swiping_area) {
     this.area = swiping_area;
     this.transformation = {
