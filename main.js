@@ -1,3 +1,15 @@
+function openFullscreen(elem) {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+
 function create_canvas() {
     gamecanvas = document.createElement("canvas");
     gamecanvas.id = "gamecanvas";
@@ -14,8 +26,18 @@ function create_canvas() {
 
 let degree = 0;
 let photo = 0;
+
 function circle_drawer() {
     ctx.clearRect(0, 0, gamecanvas.width, gamecanvas.height);
+
+    //draw the grass
+    if (window.innerHeight > window.innerWidth) {
+        ctx.drawImage(document.getElementById("pitch"), 0, 0, gamecanvas.width, gamecanvas.height);
+    } else {
+        ctx.drawImage(document.getElementById("pitch_flipped"), 0, 0, gamecanvas.width, gamecanvas.height);
+    }
+
+
     //draw the players
     for (let i = 0; i < players.length; i++) {
         ctx.beginPath();
@@ -28,7 +50,7 @@ function circle_drawer() {
     //ball spinning mechanism
     if (degree % 5 == 0 && (ball.unit_x > 0.25 || ball.unit_y > 0.25)) {
         photo++;
-        if (photo>3) {
+        if (photo > 3) {
             photo = 0;
         }
     }
@@ -45,6 +67,7 @@ function start_game() {
     create_players(players_number);
 
     circle_drawer();
+    //openFullscreen(gamecanvas);
 
     gamesession = true;
     requestAnimationFrame(gameplay);
