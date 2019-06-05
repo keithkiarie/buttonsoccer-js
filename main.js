@@ -56,7 +56,7 @@ function circle_drawer() {
     }
     degree++;
     //draw the ball
-    ctx.drawImage(document.getElementById(ball.id[0]), ball.x, ball.y, ball.dimensions, ball.dimensions);
+    ctx.drawImage(document.getElementById(ball.id[4]), ball.x, ball.y, ball.dimensions, ball.dimensions);
 }
 
 function start_game() {
