@@ -9,8 +9,23 @@ onswipe = (transformation, first_x, first_y) => {
     }
 }
 
+ontouch = (first_x, first_y) => {
+    //loop through all playing objects
+    for (let i = 0; i < players.length; i++) {
+        //check if this player is the one being swiped
+        if (first_x >= players[i].x - players[i].radius && first_y >= players[i].y - players[i].radius && first_x <= players[i].x + players[i].radius && first_y <= players[i].y + players[i].radius) {
+            players[i].unit_x = 0;
+            players[i].unit_y = 0;
+        }
+    }
+}
+
 
 function Swipe_Listener(swiping_area) {
+    let obj = this;
+
+    this.first_x, this.first_y, this.current_x, this.current_y, this.vector_x, this.vector_y, this.duration;
+
     this.area = swiping_area;
     this.transformation = {
         x: 0,
@@ -20,42 +35,40 @@ function Swipe_Listener(swiping_area) {
 
     //touch has started
     this.area.addEventListener('touchstart', function (e) {
-        this.movement = false;
-        this.first_x = event.touches[0].clientX;
-        this.first_y = event.touches[0].clientY;
-        this.start_time = Date.now();
+        obj.first_x = event.touches[0].clientX;
+        obj.first_y = event.touches[0].clientY;
+
+        obj.current_x = obj.first_x;
+        obj.current_y = obj.first_y;
+
+        setTimeout(() => obj.touch_stop(), touch_duration);
+        
+        //stop the playing object being touched
+        ontouch(obj.first_x - gamecanvas.offsetLeft, obj.first_y - gamecanvas.offsetTop);
     });
 
     //swiping
     this.area.addEventListener('touchmove', function (e) {
-        this.movement = true;
-        this.current_x = e.changedTouches[0].pageX;
-        this.current_y = e.changedTouches[0].pageY;
+        obj.current_x = e.changedTouches[0].pageX;
+        obj.current_y = e.changedTouches[0].pageY;
     });
 
+
     //touch has ended
-    this.area.addEventListener('touchend', function (e) {
-        this.end_time = Date.now();
-        this.duration = this.end_time - this.start_time;
+    this.touch_stop = () => {
+        
+        obj.duration = touch_duration;
 
-        if (this.movement) {
-            this.last_x = this.current_x;
-            this.last_y = this.current_y;
-        } else {
-            this.last_x = this.first_x;
-            this.last_y = this.first_y;
-        }
+        obj.vector_x = obj.current_x - obj.first_x;
+        obj.vector_y = obj.current_y - obj.first_y;
 
-        this.vector_x = this.last_x - this.first_x;
-        this.vector_y = this.last_y - this.first_y;
-
-        this.transformation = {
-            x: this.vector_x,
-            y: this.vector_y,
+        obj.transformation = {
+            x: obj.vector_x,
+            y: obj.vector_y,
             duration: this.duration
         };
 
         //call custom function to act on the data
-        onswipe(this.transformation, this.first_x - gamecanvas.offsetLeft, this.first_y - gamecanvas.offsetTop);
-    });
+        onswipe(obj.transformation, obj.first_x - gamecanvas.offsetLeft, obj.first_y - gamecanvas.offsetTop);
+    };
 }

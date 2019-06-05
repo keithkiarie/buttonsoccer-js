@@ -73,7 +73,9 @@ function start_game() {
     requestAnimationFrame(gameplay);
 }
 
+var test = true;
 function gameplay() {
+
     player_movement();
 
     if (gamesession) {
