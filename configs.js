@@ -14,4 +14,4 @@ let ball_id = ["ball_1", "ball_2", "ball_3", "ball_4", "ball_5"];
 let ball_grease = 5; //smoothens ball movement
 
 let touch_duration = 200;
-let touch_allowance = 20;
+let touch_allowance = 25;

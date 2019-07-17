@@ -1,7 +1,9 @@
 //called by Swipe_Listener after it has collected details about the swipe
 onswipe = (transformation) => {
-    players[closest.id].unit_x = transformation.x / transformation.duration;
-    players[closest.id].unit_y = transformation.y / transformation.duration;
+    if (typeof (closest.id) == 'number') {
+        players[closest.id].unit_x = transformation.x / transformation.duration;
+        players[closest.id].unit_y = transformation.y / transformation.duration;
+    }
 }
 
 //the object that is closest to the touched area
@@ -40,9 +42,10 @@ ontouch = (first_x, first_y) => {
     }
 
     //action the object that is decided to be the one intended by the user
-    players[closest.id].unit_x = 0;
-    players[closest.id].unit_y = 0;
-
+    if (typeof (closest.id) == 'number') {
+        players[closest.id].unit_x = 0;
+        players[closest.id].unit_y = 0;
+    }
 }
 
 
