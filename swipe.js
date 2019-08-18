@@ -41,7 +41,7 @@ ontouch = (first_x, first_y) => {
 
     }
 
-    //action the object that is decided to be the one intended by the user
+    //action on the object that is decided to be the one intended by the user
     if (typeof (closest.id) == 'number') {
         players[closest.id].unit_x = 0;
         players[closest.id].unit_y = 0;

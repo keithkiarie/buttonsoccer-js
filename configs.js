@@ -15,3 +15,10 @@ let ball_grease = 5; //smoothens ball movement
 
 let touch_duration = 200;
 let touch_allowance = 25;
+
+//the area around the pitch
+let outside_pitch = {
+    top: 20,
+    sides: 50
+}
+

@@ -27,14 +27,17 @@ function create_canvas() {
 let degree = 0;
 let photo = 0;
 
+//draws the elements in the canvas
 function circle_drawer() {
     ctx.clearRect(0, 0, gamecanvas.width, gamecanvas.height);
 
     //draw the grass
     if (window.innerHeight > window.innerWidth) {
+        //smartphone/portrait
         ctx.drawImage(document.getElementById("pitch"), 0, 0, gamecanvas.width, gamecanvas.height);
     } else {
-        ctx.drawImage(document.getElementById("pitch_flipped"), 0, 0, gamecanvas.width, gamecanvas.height);
+        //landscape
+        ctx.drawImage(document.getElementById("pitch_flipped"), outside_pitch.sides, outside_pitch.top, gamecanvas.width - (outside_pitch.sides * 2), gamecanvas.height - outside_pitch.top);
     }
 
 
@@ -47,7 +50,7 @@ function circle_drawer() {
         ctx.fill();
     }
 
-    //ball spinning mechanism
+    //ball spinning mechanism, DISABLED
     if (degree % 5 == 0 && (ball.unit_x > 0.25 || ball.unit_y > 0.25)) {
         photo++;
         if (photo > 3) {
