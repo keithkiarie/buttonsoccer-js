@@ -82,7 +82,59 @@ function player_movement() {
 
         let repeat = speed;
         do {
-            //check for contact with wall
+            if (window.innerHeight > window.innerWidth) {
+                //smartphone form factor
+
+                //check for player contact with field boundary
+                if (players[i].x + players[i].radius >= gamecanvas.width - outside_pitch.top - 2 && players[i].unit_x > 0) {
+                    players[i].unit_x = -players[i].unit_x;
+                } else if (players[i].x - players[i].radius <= 2 && players[i].unit_x < 0) {
+                    players[i].unit_x = -players[i].unit_x;
+                } else if (players[i].y + players[i].radius >= gamecanvas.height - outside_pitch.side - 2 && players[i].unit_y > 0) {
+                    players[i].unit_y = -players[i].unit_y;
+                } else if (players[i].y - players[i].radius <= outside_pitch.side + 2 && players[i].unit_y < 0) {
+                    players[i].unit_y = -players[i].unit_y;
+                }
+
+
+                //check for ball contact with field boundary
+                if (ball.x + ball.dimensions >= gamecanvas.width - outside_pitch.top - 2 && ball.unit_x > 0) {
+                    ball.unit_x = -ball.unit_x;
+                } else if (ball.x <= 2 && ball.unit_x < 0) {
+                    ball.unit_x = -ball.unit_x;
+                } else if (ball.y + ball.dimensions >= gamecanvas.height - outside_pitch.side - 2 && ball.unit_y > 0) {
+                    ball.unit_y = -ball.unit_y;
+                } else if (ball.y <= outside_pitch.side + 2 && ball.unit_y < 0) {
+                    ball.unit_y = -ball.unit_y;
+                }
+            } else {
+                //laptop form factor
+
+                //check for player contact with field boundary
+                if (players[i].x + players[i].radius >= gamecanvas.width - outside_pitch.side - 2 && players[i].unit_x > 0) {
+                    players[i].unit_x = -players[i].unit_x;
+                } else if (players[i].x - players[i].radius <= outside_pitch.side + 2 && players[i].unit_x < 0) {
+                    players[i].unit_x = -players[i].unit_x;
+                } else if (players[i].y + players[i].radius >= gamecanvas.height - 2 && players[i].unit_y > 0) {
+                    players[i].unit_y = -players[i].unit_y;
+                } else if (players[i].y - players[i].radius <= outside_pitch.top - 2 && players[i].unit_y < 0) {
+                    players[i].unit_y = -players[i].unit_y;
+                }
+
+                //check for ball contact with field boundary
+                if (ball.x + ball.dimensions >= gamecanvas.width - outside_pitch.side - 2 && ball.unit_x > 0) {
+                    ball.unit_x = -ball.unit_x;
+                } else if (ball.x <= outside_pitch.side && ball.unit_x < 0) {
+                    ball.unit_x = -ball.unit_x;
+                } else if (ball.y + ball.dimensions >= gamecanvas.height - 2 && ball.unit_y > 0) {
+                    ball.unit_y = -ball.unit_y;
+                } else if (ball.y <= outside_pitch.top && ball.unit_y < 0) {
+                    ball.unit_y = -ball.unit_y;
+                }
+            }
+
+
+            //check for player contact with wall
             if (players[i].x + players[i].radius >= gamecanvas.width - 2 && players[i].unit_x > 0) {
                 players[i].unit_x = -players[i].unit_x;
             } else if (players[i].x - players[i].radius <= 2 && players[i].unit_x < 0) {
@@ -92,6 +144,7 @@ function player_movement() {
             } else if (players[i].y - players[i].radius <= 2 && players[i].unit_y < 0) {
                 players[i].unit_y = -players[i].unit_y;
             }
+
 
             //check for ball contact with wall
             if (ball.x + ball.dimensions >= gamecanvas.width - 2 && ball.unit_x > 0) {

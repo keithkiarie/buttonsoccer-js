@@ -59,6 +59,7 @@ function circle_drawer() {
         }
     }
     degree++;
+
     //draw the ball
     ctx.drawImage(document.getElementById(ball.id[4]), ball.x, ball.y, ball.dimensions, ball.dimensions);
 }
