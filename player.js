@@ -38,9 +38,9 @@ function create_players(number) {
     let portion;
 
     if (window.innerHeight > window.innerWidth) {
-        portion = gamecanvas.width / (half + 1);
+        portion = play_area.width / (half + 1);
     } else {
-        portion = gamecanvas.height / (half + 1);
+        portion = play_area.height / (half + 1);
     }
 
     //create players
@@ -48,15 +48,18 @@ function create_players(number) {
         let x_1, x_2, y_1, y_2;
 
         if (window.innerHeight > window.innerWidth) {
+            //smartphone form factor
+            //the top of the screen is its right edge
             x_1 = (i + 1) * portion;
-            y_1 = gamecanvas.height * 0.1;
+            y_1 = gamecanvas.height * 0.1 + outside_pitch.side;
             x_2 = (i - half + 1) * portion;
-            y_2 = gamecanvas.height * 0.9;
+            y_2 = gamecanvas.height * 0.9 - outside_pitch.side;
         } else {
-            x_1 = gamecanvas.width * 0.1;
-            y_1 = (i + 1) * portion;
-            x_2 = gamecanvas.width * 0.9;
-            y_2 = (i - half + 1) * portion;
+            //laptop form factor
+            x_1 = gamecanvas.width * 0.1 + outside_pitch.side;
+            y_1 = (i + 1) * portion + outside_pitch.top;
+            x_2 = gamecanvas.width * 0.9 - outside_pitch.side;
+            y_2 = (i - half + 1) * portion + outside_pitch.top;
         }
 
         if (i < half) {

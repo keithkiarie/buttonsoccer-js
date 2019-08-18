@@ -34,10 +34,11 @@ function circle_drawer() {
     //draw the grass
     if (window.innerHeight > window.innerWidth) {
         //smartphone/portrait
-        ctx.drawImage(document.getElementById("pitch"), 0, 0, gamecanvas.width, gamecanvas.height);
+        //the top and the bottom of the screen are taken as the right and left sides respectively
+        ctx.drawImage(document.getElementById("pitch"), 0, outside_pitch.side, gamecanvas.width - outside_pitch.top, gamecanvas.height - (outside_pitch.side * 2));
     } else {
         //landscape
-        ctx.drawImage(document.getElementById("pitch_flipped"), outside_pitch.sides, outside_pitch.top, gamecanvas.width - (outside_pitch.sides * 2), gamecanvas.height - outside_pitch.top);
+        ctx.drawImage(document.getElementById("pitch_flipped"), outside_pitch.side, outside_pitch.top, gamecanvas.width - (outside_pitch.side * 2), gamecanvas.height - outside_pitch.top);
     }
 
 
