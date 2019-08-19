@@ -7,7 +7,7 @@ let player_radius;
         player_radius = 0.4 * (window.innerWidth / players_number);
     }
 
-let ball_dimensions = 30;
+let ball_dimensions = player_radius * 1.2;
 
 let player_friction = 0.995;
 let ball_friction = 0.999;
