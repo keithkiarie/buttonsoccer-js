@@ -1,5 +1,12 @@
 let players_number = 6; //has to be an even number
-let player_radius = 25;
+
+let player_radius;
+    if (window.innerWidth > window.innerHeight) {
+        player_radius = 0.4 * (window.innerHeight / players_number);
+    } else {
+        player_radius = 0.4 * (window.innerWidth / players_number);
+    }
+
 let ball_dimensions = 30;
 
 let player_friction = 0.995;
@@ -49,5 +56,13 @@ if (gamecanvas.height > gamecanvas.width) {
         width: gamecanvas.width - (outside_pitch.side * 2),
         height: gamecanvas.height - outside_pitch.top
     };
+}
+
+//goal post
+let goal_post = {
+    width : outside_pitch.side + 10,
+    height : play_area.height / 2.5,
+    x : 0,
+    y : (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2)
 }
 
