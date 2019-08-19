@@ -1,11 +1,11 @@
 let players_number = 6; //has to be an even number
 
 let player_radius;
-    if (window.innerWidth > window.innerHeight) {
-        player_radius = 0.4 * (window.innerHeight / players_number);
-    } else {
-        player_radius = 0.4 * (window.innerWidth / players_number);
-    }
+if (window.innerWidth > window.innerHeight) {
+    player_radius = 0.4 * (window.innerHeight / players_number);
+} else {
+    player_radius = 0.4 * (window.innerWidth / players_number);
+}
 
 let ball_dimensions = player_radius * 1.2;
 
@@ -59,14 +59,29 @@ if (gamecanvas.height > gamecanvas.width) {
 }
 
 //goal post
-let goal_post = {
-    width : outside_pitch.side + 10,
-    height : play_area.height / 2.5,
+let goal_post;
+if (window.innerWidth > window.innerHeight) {
+    //laptop
+    goal_post = {
+        width: outside_pitch.side + 10,
+        height: play_area.height / 2.5,
 
-    x1 : 0,
-    y1 : (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2),
+        x1: 0,
+        y1: (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2),
 
-    x2 : outside_pitch.side + play_area.width - 7,
-    y2 : (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2)
+        x2: outside_pitch.side + play_area.width - 7,
+        y2: (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2)
+    }
+} else {
+    //smartphone
+    goal_post = {
+        width: play_area.width / 2.5,
+        height: outside_pitch.side + 15,
+
+        x1: (play_area.width / 2) - ((play_area.width / 2.5) / 2),
+        y1: -5,
+
+        x2: (play_area.width / 2) - ((play_area.width / 2.5) / 2),
+        y2: outside_pitch.side + play_area.height - 10
+    }
 }
-
