@@ -1,14 +1,14 @@
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
-      elem.requestFullscreen();
+        elem.requestFullscreen();
     } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
+        elem.mozRequestFullScreen();
     } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-      elem.webkitRequestFullscreen();
+        elem.webkitRequestFullscreen();
     } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
+        elem.msRequestFullscreen();
     }
-  }
+}
 
 function create_canvas() {
     gamecanvas = document.createElement("canvas");
@@ -62,6 +62,11 @@ function circle_drawer() {
 
     //draw the ball
     ctx.drawImage(document.getElementById(ball.id[4]), ball.x, ball.y, ball.dimensions, ball.dimensions);
+
+    
+    //draw the nets
+    ctx.drawImage(document.getElementById("net1"), goal_post.x1, goal_post.y1, goal_post.width, goal_post.height);
+    ctx.drawImage(document.getElementById("net2"), goal_post.x2, goal_post.y2, goal_post.width, goal_post.height);
 }
 
 function start_game() {

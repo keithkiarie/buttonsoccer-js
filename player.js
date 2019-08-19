@@ -83,7 +83,7 @@ function player_movement() {
         let repeat = speed;
         do {
             if (window.innerHeight > window.innerWidth) {
-                //smartphone form factor
+                //SMARTPHONE form factor
 
                 //check for player contact with field boundary
                 if (players[i].x + players[i].radius >= gamecanvas.width - outside_pitch.top - 2 && players[i].unit_x > 0) {
@@ -108,21 +108,60 @@ function player_movement() {
                     ball.unit_y = -ball.unit_y;
                 }
             } else {
-                //laptop form factor
 
+                //LAPTOP
+
+                //if a player is in the goal
+                if (players[i].x - players[i].radius < outside_pitch.side || players[i].x + players[i].radius > outside_pitch.side + play_area.width) {
+                    //contact with goal post
+                    if (players[i].y + players[i].radius >= goal_post.y1 + goal_post.height - 10 && players[i].unit_y > 0) {
+                        players[i].unit_y = -players[i].unit_y;
+                    } else if (players[i].y - players[i].radius <= goal_post.y1 + 10 && players[i].unit_y < 0) {
+                        players[i].unit_y = -players[i].unit_y;
+                    }
+                }
+
+                //if a player is headed for the goal
+                if (players[i].x - players[i].radius <= outside_pitch.side + 2 && players[i].unit_x < 0 &&
+                    players[i].y - players[i].radius - 5 > goal_post.y1 && players[i].y + players[i].radius + 5 < goal_post.y1 + goal_post.height) {
+
+                } else if (players[i].x + players[i].radius >= outside_pitch.side + play_area.width - 2 && players[i].unit_x > 0 &&
+                    players[i].y - players[i].radius - 5 > goal_post.y1 && players[i].y + players[i].radius + 5 < goal_post.y1 + goal_post.height) {
+                    
+                }
                 //check for player contact with field boundary
-                if (players[i].x + players[i].radius >= gamecanvas.width - outside_pitch.side - 2 && players[i].unit_x > 0) {
+                else if (players[i].x + players[i].radius >= gamecanvas.width - outside_pitch.side - 2 && players[i].unit_x > 0) {
                     players[i].unit_x = -players[i].unit_x;
                 } else if (players[i].x - players[i].radius <= outside_pitch.side + 2 && players[i].unit_x < 0) {
                     players[i].unit_x = -players[i].unit_x;
                 } else if (players[i].y + players[i].radius >= gamecanvas.height - 2 && players[i].unit_y > 0) {
                     players[i].unit_y = -players[i].unit_y;
-                } else if (players[i].y - players[i].radius <= outside_pitch.top - 2 && players[i].unit_y < 0) {
+                } else if (players[i].y - players[i].radius <= outside_pitch.top + 2 && players[i].unit_y < 0) {
                     players[i].unit_y = -players[i].unit_y;
                 }
 
                 //check for ball contact with field boundary
-                if (ball.x + ball.dimensions >= gamecanvas.width - outside_pitch.side - 2 && ball.unit_x > 0) {
+                //if the ball is in the goal
+                if (ball.x < outside_pitch.side || ball.x + ball.dimensions > outside_pitch.side + play_area.width) {
+                    //contact with goal post
+                    if (ball.y + ball.dimensions >= goal_post.y1 + goal_post.height - 10 && ball.unit_y > 0) {
+                        ball.unit_y = -ball.unit_y;
+                    } else if (ball.y <= goal_post.y1 + 10 && ball.unit_y < 0) {
+                        ball.unit_y = -ball.unit_y;
+                    }
+                }
+
+
+                //if the ball is headed for the goal
+                if (ball.x <= outside_pitch.side + 2 && ball.unit_x < 0 &&
+                    ball.y - 5 > goal_post.y1 && ball.y + ball.dimensions + 5 < goal_post.y1 + goal_post.height) {
+
+                } else if (ball.x + ball.dimensions >= outside_pitch.side + play_area.width - 2 && ball.unit_x > 0 && 
+                    ball.y - 5 > goal_post.y1 && ball.y + ball.dimensions + 5 < goal_post.y1 + goal_post.height) {
+
+                }
+                //check for ball contact with field boundary
+                else if (ball.x + ball.dimensions >= gamecanvas.width - outside_pitch.side - 2 && ball.unit_x > 0) {
                     ball.unit_x = -ball.unit_x;
                 } else if (ball.x <= outside_pitch.side && ball.unit_x < 0) {
                     ball.unit_x = -ball.unit_x;
@@ -137,7 +176,7 @@ function player_movement() {
             //check for player contact with wall
             if (players[i].x + players[i].radius >= gamecanvas.width - 2 && players[i].unit_x > 0) {
                 players[i].unit_x = -players[i].unit_x;
-            } else if (players[i].x - players[i].radius <= 2 && players[i].unit_x < 0) {
+            } else if (players[i].x - players[i].radius <= 7 && players[i].unit_x < 0) {
                 players[i].unit_x = -players[i].unit_x;
             } else if (players[i].y + players[i].radius >= gamecanvas.height - 2 && players[i].unit_y > 0) {
                 players[i].unit_y = -players[i].unit_y;

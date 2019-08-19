@@ -62,7 +62,11 @@ if (gamecanvas.height > gamecanvas.width) {
 let goal_post = {
     width : outside_pitch.side + 10,
     height : play_area.height / 2.5,
-    x : 0,
-    y : (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2)
+
+    x1 : 0,
+    y1 : (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2),
+
+    x2 : outside_pitch.side + play_area.width - 7,
+    y2 : (play_area.height / 2) + outside_pitch.top - ((play_area.height / 2.5) / 2)
 }
 
