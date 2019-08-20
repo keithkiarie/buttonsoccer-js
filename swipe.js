@@ -13,11 +13,13 @@ let closest = {
 };
 
 ontouch = (first_x, first_y) => {
+    
     closest.id = null;
     closest.dist = null;
 
     //loop through the objects to find the closest to the touch area but should be within a reasonable radius
     for (let i = 0; i < players.length; i++) {
+        
         //check if this player is close to the touched area
         if (first_x + touch_allowance >= players[i].x - players[i].radius &&
             first_y + touch_allowance >= players[i].y - players[i].radius &&
@@ -70,6 +72,8 @@ function Swipe_Listener(swiping_area) {
         obj.current_y = obj.first_y;
 
         //stop the playing object being touched
+        gamecanvas.offsetLeft == undefined ? gamecanvas.offsetLeft = 0 : gamecanvas.offsetLeft = gamecanvas.offsetLeft;
+        gamecanvas.offsetTop == undefined ? gamecanvas.offsetTop = 0 : gamecanvas.offsetTop = gamecanvas.offsetTop;
         ontouch(obj.first_x - gamecanvas.offsetLeft, obj.first_y - gamecanvas.offsetTop);
 
         //call touch_stop after a certain duration of listening to the touch

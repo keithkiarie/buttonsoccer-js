@@ -1,4 +1,5 @@
 function openFullscreen(elem) {
+
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.mozRequestFullScreen) { /* Firefox */
@@ -8,6 +9,47 @@ function openFullscreen(elem) {
     } else if (elem.msRequestFullscreen) { /* IE/Edge */
         elem.msRequestFullscreen();
     }
+}
+
+//listen for when the screen changes to full screen
+document.addEventListener("fullscreenchange", function () {
+    adjust_to_fullscreen();
+});
+document.addEventListener("mozfullscreenchange", function () {
+    adjust_to_fullscreen();
+});
+document.addEventListener("webkitfullscreenchange", function () {
+    adjust_to_fullscreen();
+});
+document.addEventListener("msfullscreenchange", function () {
+    adjust_to_fullscreen();
+});
+
+function adjust_to_fullscreen() {
+    gamecanvas = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+
+    //change the values of the configurations
+    config();
+
+    //adjust the positions of the players and the ball
+    for (let i = 0; i < players.length; i++) {
+        players[i].x *= window.innerWidth / screen_dimensions.width;
+        players[i].y *= window.innerHeight / screen_dimensions.height;
+    }
+
+    if (ball != undefined) {
+        ball.x *= window.innerWidth / screen_dimensions.width;
+        ball.y *= window.innerHeight / screen_dimensions.height;
+    }
+
+
+    screen_dimensions = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
 }
 
 function create_canvas() {
@@ -96,6 +138,7 @@ function gameplay() {
     if (gamesession) {
         requestAnimationFrame(gameplay);
     }
+    score_keeper();
 }
 
 function change_display(div_to_display) {
@@ -108,4 +151,52 @@ function change_display(div_to_display) {
             document.getElementById(div).style.display = "none";
         }
     });
+}
+
+//a goal has been scored
+function goal() {
+    
+    //take the ball back to the center
+    ball.x = ball_initial_position.x;
+    ball.y = ball_initial_position.y;
+
+    ball.unit_x = 0;
+    ball.unit_y = 0;
+
+    //reposition the players
+    initial_players_positioning();
+    players.forEach(player => {
+        player.unit_x = 0;
+        player.unit_y = 0;
+    });
+}
+
+//keeps track of the score in the game
+let home_score = 0;
+let away_score = 0;
+function score_keeper(scorer) {
+
+    //check who has scored
+    if (scorer == 'home') {
+        home_score++;
+    } else if (scorer == 'away') {
+        away_score++;
+    }
+
+    //display the scores
+    ctx.font = scores_display.font;
+    ctx.fillStyle = scores_display.color;
+    ctx.textAlign = "center";
+
+    if (window.innerWidth > window.innerHeight) {
+        //on laptops
+        ctx.fillText(`${home_score} : ${away_score}`, scores_display.x, scores_display.y);
+
+    } else {
+        //on smartphone (potrait displays)
+        ctx.save();
+        ctx.rotate(90 * Math.PI / 180);
+        ctx.fillText(`${home_score} : ${away_score}`, scores_display.x, scores_display.y);
+        ctx.restore();
+    }
 }

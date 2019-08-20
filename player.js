@@ -26,48 +26,24 @@ function Ball(x_position, y_position, dimensions, identity) {
     this.friction = ball_friction;
 }
 
+//creates the ball
 function create_ball() {
-    ball = new Ball((gamecanvas.width / 2) - ball_dimensions / 2, (gamecanvas.height / 2) - ball_dimensions / 2, ball_dimensions, ball_id);
+    ball = new Ball(ball_initial_position.x, ball_initial_position.y, ball_dimensions, ball_id);
 }
 
+//creates the pieces for playing
 function create_players(number) {
-    players = [];
-    let half = number / 2;
-
-    //initial positioning, depends on the number of balls
-    let portion;
-
-    if (window.innerHeight > window.innerWidth) {
-        portion = play_area.width / (half + 1);
-    } else {
-        portion = play_area.height / (half + 1);
-    }
-
-    //create players
+    //create the players for both teams and populate them into the array
     for (let i = 0; i < number; i++) {
-        let x_1, x_2, y_1, y_2;
-
-        if (window.innerHeight > window.innerWidth) {
-            //smartphone form factor
-            //the top of the screen is its right edge
-            x_1 = (i + 1) * portion;
-            y_1 = gamecanvas.height * 0.1 + outside_pitch.side;
-            x_2 = (i - half + 1) * portion;
-            y_2 = gamecanvas.height * 0.9 - outside_pitch.side;
+        if (i < number / 2) {
+            players.push(new Player(0, 0, player_radius, 1, i, team_1_color));
         } else {
-            //laptop form factor
-            x_1 = gamecanvas.width * 0.1 + outside_pitch.side;
-            y_1 = (i + 1) * portion + outside_pitch.top;
-            x_2 = gamecanvas.width * 0.9 - outside_pitch.side;
-            y_2 = (i - half + 1) * portion + outside_pitch.top;
-        }
-
-        if (i < half) {
-            players.push(new Player(x_1, y_1, player_radius, 1, i, team_1_color));
-        } else {
-            players.push(new Player(x_2, y_2, player_radius, 2, i, team_2_color));
+            players.push(new Player(0, 0, player_radius, 2, i, team_2_color));
         }
     }
+
+    //position the players properly in the field
+    initial_players_positioning();
 }
 
 function player_movement() {
@@ -118,6 +94,15 @@ function player_movement() {
                 //check for ball contact with field boundary
                 //if the ball is in the goal
                 if (ball.y < outside_pitch.side || ball.y + ball.dimensions > outside_pitch.side + play_area.height) {
+                    //GOOAAAAAAL!!!!
+                    if (ball.y + ball.dimensions < outside_pitch.side) {
+                        goal();
+                        score_keeper('away');
+                    } else if (ball.y > outside_pitch.side + play_area.height) {
+                        goal();
+                        score_keeper('home');
+                    }
+
                     //contact with goal post
                     if (ball.x + ball.dimensions >= goal_post.x1 + goal_post.width - 10 && ball.unit_x > 0) {
                         ball.unit_x = -ball.unit_x;
@@ -181,6 +166,16 @@ function player_movement() {
                 //check for ball contact with field boundary
                 //if the ball is in the goal
                 if (ball.x < outside_pitch.side || ball.x + ball.dimensions > outside_pitch.side + play_area.width) {
+
+                    //GOOAAAAAAL!!!!
+                    if (ball.x + ball.dimensions < outside_pitch.side) {
+                        goal();
+                        score_keeper('away');
+                    } else if (ball.x > outside_pitch.side + play_area.width) {
+                        goal();
+                        score_keeper('home');
+                    }
+
                     //contact with goal post
                     if (ball.y + ball.dimensions >= goal_post.y1 + goal_post.height - 10 && ball.unit_y > 0) {
                         ball.unit_y = -ball.unit_y;

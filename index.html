@@ -20,6 +20,7 @@
     <div id="main_menu">
         <br><br>
         <button id="start_game" onclick="start_game()">Start</button>
+        <button id="full_screen" onclick="openFullscreen(document.documentElement)">Full Screen</button>
     </div>
 
     <div id="game_div" style="display:none;"></div>
@@ -45,6 +46,11 @@
 
 <script>
     let gamecanvas = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+
+    let screen_dimensions = {
         width: window.innerWidth,
         height: window.innerHeight
     };
