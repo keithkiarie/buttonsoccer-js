@@ -127,15 +127,28 @@ function start_game() {
     //openFullscreen(gamecanvas);
 
     gamesession = true;
+    game_time_counter = 0;
     requestAnimationFrame(gameplay);
 }
 
 var test = true;
+
+let game_time_counter;;
 function gameplay() {
 
     player_movement();
 
     if (gamesession) {
+        //increase the value of the counter
+        game_time_counter++;
+
+        //try adjusting the screen after every several frames just incase it was changed to/from fullscreen
+        if (game_time_counter % 100 == 0) {
+            if (gamecanvas.height != window.innerHeight || gamecanvas.width != window.innerWidth) {
+                adjust_to_fullscreen();
+            }
+        }
+
         requestAnimationFrame(gameplay);
     }
     score_keeper();
@@ -155,7 +168,7 @@ function change_display(div_to_display) {
 
 //a goal has been scored
 function goal() {
-    
+
     //take the ball back to the center
     ball.x = ball_initial_position.x;
     ball.y = ball_initial_position.y;
