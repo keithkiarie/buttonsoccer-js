@@ -37,8 +37,8 @@ config = () => {
         //smartphone form factor
         //the top is right side of the screen, the sides are the top and bottom of the smartphone
         outside_pitch = {
-            top: gamecanvas.height * 0.05,
-            side: gamecanvas.width * 0.15
+            top: gamecanvas.width * 0.05,
+            side: gamecanvas.height * 0.08
         };
     } else {
         //laptops form factor
@@ -92,18 +92,28 @@ config = () => {
             x2: (play_area.width / 2) - ((play_area.width / 2.5) / 2),
             y2: outside_pitch.side + play_area.height - 10
         }
+        //if it is in full screen mode
+        if (document.fullscreen || window.innerHeight == screen.height) {
+            goal_post.y2 = screen.height - outside_pitch.side - 10;
+        }
     }
 
     //the initial position of the ball when the game is starting or a goal has been scored
     if (window.innerWidth > window.innerHeight) {
+        //laptop
         ball_initial_position = {
             x: (play_area.width / 2) - ball_dimensions / 2 + outside_pitch.side,
             y: (play_area.height / 2) - ball_dimensions / 2 + outside_pitch.top
         }
     } else {
+        //smartphone
         ball_initial_position = {
             x: (play_area.width / 2) - (ball_dimensions / 2),
-            y: (play_area.height / 2) - (ball_dimensions / 2) + outside_pitch.side
+            y: (gamecanvas.height / 2) - (ball_dimensions / 2)
+        }
+        //if it is in full screen mode
+        if (document.fullscreen || window.innerHeight == screen.height) {
+            ball_initial_position.y = (screen.height / 2) - (ball_dimensions / 2);
         }
     }
 
@@ -112,11 +122,11 @@ config = () => {
     scores_display = {
         font: `${outside_pitch.top}px Arial`,
         color: "black",
-    
+
         x: outside_pitch.side + (play_area.width / 2) - 45,
         y: outside_pitch.top
     };
-    
+
     if (window.innerWidth > window.innerHeight) {
         //laptops
         scores_display.x = gamecanvas.width / 2;
@@ -162,11 +172,9 @@ function initial_players_positioning() {
         }
 
         if (i < half) {
-            //players.push(new Player(x_1, y_1, player_radius, 1, i, team_1_color));
             players[i].x = x_1;
             players[i].y = y_1;
         } else {
-            //players.push(new Player(x_2, y_2, player_radius, 2, i, team_2_color));
             players[i].x = x_2;
             players[i].y = y_2;
         }
