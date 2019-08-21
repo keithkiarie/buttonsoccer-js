@@ -135,6 +135,11 @@ config = () => {
         //smartphone
         scores_display.x = gamecanvas.height / 2;
         scores_display.y = -play_area.width;
+
+        //if it is in full screen mode
+        if (document.fullscreen || window.innerHeight == screen.height) {
+            scores_display.x = screen.height / 2;
+        }
     }
 }
 
