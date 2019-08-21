@@ -62,7 +62,7 @@ function player_movement() {
                 //SMARTPHONE form factor
 
                 //if a player is in the goal
-                if (players[i].y - players[i].radius < outside_pitch.side || players[i].y + players[i].radius > outside_pitch.side + play_area.height) {
+                if (players[i].y - players[i].radius < goal_post.y1 + goal_post.height || players[i].y + players[i].radius > goal_post.y2) {
                     //contact with goal post
                     if (players[i].x + players[i].radius >= goal_post.x1 + goal_post.width - 10 && players[i].unit_x > 0) {
                         players[i].unit_x = -players[i].unit_x;
@@ -95,10 +95,10 @@ function player_movement() {
                 //if the ball is in the goal
                 if (ball.y < outside_pitch.side || ball.y + ball.dimensions > outside_pitch.side + play_area.height) {
                     //GOOAAAAAAL!!!!
-                    if (ball.y + ball.dimensions < outside_pitch.side) {
+                    if (ball.y + ball.dimensions < goal_post.y1 + goal_post.height) {
                         goal();
                         score_keeper('away');
-                    } else if (ball.y > outside_pitch.side + play_area.height) {
+                    } else if (ball.y > goal_post.y2) {
                         goal();
                         score_keeper('home');
                     }
