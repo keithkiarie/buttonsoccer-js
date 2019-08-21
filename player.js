@@ -33,6 +33,7 @@ function create_ball() {
 
 //creates the pieces for playing
 function create_players(number) {
+    players = [];
     //create the players for both teams and populate them into the array
     for (let i = 0; i < number; i++) {
         if (i < number / 2) {

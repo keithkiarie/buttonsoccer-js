@@ -16,7 +16,7 @@ let touch_allowance = 25;
 
 
 //all the variables set inside the config function
-let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, back_button, pause_button, play_button, fullscreen_button;
+let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button;
 
 //config is called in the other scripts to reinitialize all the variables under this function
 config = () => {
@@ -93,8 +93,8 @@ config = () => {
             y2: outside_pitch.side + play_area.height - 10
         }
         //if it is in full screen mode
-        if (document.fullscreen || window.innerHeight == screen.height) {
-            goal_post.y2 = screen.height - outside_pitch.side - 10;
+        if (document.fullscreen || window.innerHeight == screen.avalHeight) {
+            goal_post.y2 = screen.avalHeight - outside_pitch.side - 10;
         }
     }
 
@@ -112,8 +112,8 @@ config = () => {
             y: (gamecanvas.height / 2) - (ball_dimensions / 2)
         }
         //if it is in full screen mode
-        if (document.fullscreen || window.innerHeight == screen.height) {
-            ball_initial_position.y = (screen.height / 2) - (ball_dimensions / 2);
+        if (document.fullscreen || window.innerHeight == screen.avalHeight) {
+            ball_initial_position.y = (screen.avalHeight / 2) - (ball_dimensions / 2);
         }
     }
 
@@ -137,8 +137,8 @@ config = () => {
         scores_display.y = -play_area.width;
 
         //if it is in full screen mode
-        if (document.fullscreen || window.innerHeight == screen.height) {
-            scores_display.x = screen.height / 2;
+        if (document.fullscreen || window.innerHeight == screen.avalHeight) {
+            scores_display.x = screen.avalHeight / 2;
         }
     }
 
@@ -148,15 +148,17 @@ config = () => {
 
         //back button
         back_button = {
+            name: "back_button",
             x: 0,
             y: 5,
-            width: outside_pitch.side -5,
-            height: outside_pitch.side - 5,
+            width: outside_pitch.side - 10,
+            height: outside_pitch.side - 10,
             image: document.getElementById("back_button_flipped")
         };
 
         //pause button
         pause_button = {
+            name: "pause_button",
             x: play_area.width - 5,
             y: 5,
             width: outside_pitch.top,
@@ -166,6 +168,7 @@ config = () => {
 
         //play button
         play_button = {
+            name: "play_button",
             x: play_area.width,
             y: 5,
             width: outside_pitch.top,
@@ -175,9 +178,10 @@ config = () => {
 
         //fullscreen button
         fullscreen_button = {
+            name: "fullscreen_button",
             x: 0,
             y: goal_post.y2 + 10,
-            width: outside_pitch.side -5,
+            width: outside_pitch.side - 5,
             height: outside_pitch.side - 5,
             image: document.getElementById("fullscreen_button_flipped")
         };
@@ -186,6 +190,7 @@ config = () => {
 
         //back button
         back_button = {
+            name: "back_button",
             x: 0,
             y: 0,
             width: outside_pitch.top,
@@ -195,6 +200,7 @@ config = () => {
 
         //pause button
         pause_button = {
+            name: "pause_button",
             x: outside_pitch.top,
             y: 0,
             width: outside_pitch.top,
@@ -204,13 +210,32 @@ config = () => {
 
         //play button
         play_button = {
+            name: "play_button",
             x: outside_pitch.top,
             y: 0,
             width: outside_pitch.top,
             height: outside_pitch.top,
             image: document.getElementById("play_button")
         };
+
+        //fullscreen button
+        fullscreen_button = {
+            name: "fullscreen_button",
+            x: goal_post.x2 + 10,
+            y: gamecanvas.height - outside_pitch.top - 5,
+            width: outside_pitch.top,
+            height: outside_pitch.top,
+            image: document.getElementById("fullscreen_button_flipped")
+        };
     }
+
+    //array listing all the buttons in the canvas
+    buttons = [
+        back_button,
+        pause_button,
+        play_button,
+        fullscreen_button
+    ];
 }
 
 config();

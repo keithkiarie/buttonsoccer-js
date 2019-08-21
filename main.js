@@ -11,6 +11,20 @@ function openFullscreen(elem) {
     }
 }
 
+function closeFullscreen() {
+
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE/Edge */
+        document.msExitFullscreen();
+    }
+
+}
+
 //listen for when the screen changes to full screen
 document.addEventListener("fullscreenchange", function () {
     adjust_to_fullscreen();
@@ -136,6 +150,9 @@ function start_game() {
     create_canvas();
     create_ball();
     create_players(players_number);
+
+    home_score = 0;
+    away_score = 0;
 
     circle_drawer();
 

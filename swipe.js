@@ -13,13 +13,52 @@ let closest = {
 };
 
 ontouch = (first_x, first_y) => {
-    
+
+    //check if a button is being pressed
+    for (let i = 0; i < buttons.length; i++) {
+        if (first_x - 5 >= buttons[i].x && first_x <= buttons[i].x + buttons[i].width + 5 && first_y - 5 >= buttons[i].y && first_y <= buttons[i].y + buttons[i].height + 5) {
+
+            //back button
+            if (buttons[i].name == 'back_button') {
+                gamesession = false;
+                document.getElementById("game_div").removeChild(gamecanvas);
+                change_display("main_menu");
+                break;
+            }
+
+            //pause button (it is in the same position as play)
+            if (buttons[i].name == 'pause_button' && gamesession) {
+                gamesession = false;
+                break;
+            }
+
+            //play button (it is in the same position as pause)
+            if (buttons[i].name == 'play_button' && !gamesession) {
+                gamesession = true;
+                gameplay();
+                break;
+            }
+
+            //play button (it is in the same position as pause)
+            if (buttons[i].name == 'fullscreen_button') {
+                if (document.fullscreen || window.innerHeight == screen.availHeight) {
+                    closeFullscreen();
+                } else {
+                    openFullscreen(document.documentElement);
+                    
+                }
+                break;
+            }
+
+        }
+    }
+
     closest.id = null;
     closest.dist = null;
 
     //loop through the objects to find the closest to the touch area but should be within a reasonable radius
     for (let i = 0; i < players.length; i++) {
-        
+
         //check if this player is close to the touched area
         if (first_x + touch_allowance >= players[i].x - players[i].radius &&
             first_y + touch_allowance >= players[i].y - players[i].radius &&
