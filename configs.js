@@ -16,7 +16,7 @@ let touch_allowance = 25;
 
 
 //all the variables set inside the config function
-let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display;
+let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, back_button, pause_button, play_button, fullscreen_button;
 
 //config is called in the other scripts to reinitialize all the variables under this function
 config = () => {
@@ -37,7 +37,7 @@ config = () => {
         //smartphone form factor
         //the top is right side of the screen, the sides are the top and bottom of the smartphone
         outside_pitch = {
-            top: gamecanvas.width * 0.05,
+            top: gamecanvas.width * 0.08,
             side: gamecanvas.height * 0.08
         };
     } else {
@@ -140,6 +140,76 @@ config = () => {
         if (document.fullscreen || window.innerHeight == screen.height) {
             scores_display.x = screen.height / 2;
         }
+    }
+
+    //back, pause, play and fullscreen buttons
+    if (window.innerHeight > window.innerWidth) {
+        //SMARTPHONES
+
+        //back button
+        back_button = {
+            x: 0,
+            y: 5,
+            width: outside_pitch.side -5,
+            height: outside_pitch.side - 5,
+            image: document.getElementById("back_button_flipped")
+        };
+
+        //pause button
+        pause_button = {
+            x: play_area.width - 5,
+            y: 5,
+            width: outside_pitch.top,
+            height: outside_pitch.top,
+            image: document.getElementById("pause_button_flipped")
+        };
+
+        //play button
+        play_button = {
+            x: play_area.width,
+            y: 5,
+            width: outside_pitch.top,
+            height: outside_pitch.top,
+            image: document.getElementById("play_button_flipped")
+        };
+
+        //fullscreen button
+        fullscreen_button = {
+            x: 0,
+            y: goal_post.y2 + 10,
+            width: outside_pitch.side -5,
+            height: outside_pitch.side - 5,
+            image: document.getElementById("fullscreen_button_flipped")
+        };
+    } else {
+        //LAPTOPS
+
+        //back button
+        back_button = {
+            x: 0,
+            y: 0,
+            width: outside_pitch.top,
+            height: outside_pitch.top,
+            image: document.getElementById("back_button")
+        };
+
+        //pause button
+        pause_button = {
+            x: outside_pitch.top,
+            y: 0,
+            width: outside_pitch.top,
+            height: outside_pitch.top,
+            image: document.getElementById("pause_button")
+        };
+
+        //play button
+        play_button = {
+            x: outside_pitch.top,
+            y: 0,
+            width: outside_pitch.top,
+            height: outside_pitch.top,
+            image: document.getElementById("play_button")
+        };
     }
 }
 

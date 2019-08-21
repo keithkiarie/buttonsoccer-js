@@ -77,10 +77,24 @@ function circle_drawer() {
     if (window.innerHeight > window.innerWidth) {
         //smartphone/portrait
         //the top and the bottom of the screen are taken as the right and left sides respectively
+
+        //the grass
         ctx.drawImage(document.getElementById("pitch"), 0, outside_pitch.side, gamecanvas.width - outside_pitch.top, gamecanvas.height - (outside_pitch.side * 2));
+
+
     } else {
         //landscape
         ctx.drawImage(document.getElementById("pitch_flipped"), outside_pitch.side, outside_pitch.top, gamecanvas.width - (outside_pitch.side * 2), gamecanvas.height - outside_pitch.top);
+    }
+
+    //the back, pause and play buttons
+    ctx.drawImage(back_button.image, back_button.x, back_button.y, back_button.width, back_button.height);
+    ctx.drawImage(fullscreen_button.image, fullscreen_button.x, fullscreen_button.y, fullscreen_button.width, fullscreen_button.height);
+
+    if (gamesession) {
+        ctx.drawImage(pause_button.image, pause_button.x, pause_button.y, pause_button.width, pause_button.height);
+    } else {
+        ctx.drawImage(play_button.image, play_button.x, play_button.y, play_button.width, play_button.height);
     }
 
 
@@ -124,7 +138,6 @@ function start_game() {
     create_players(players_number);
 
     circle_drawer();
-    //openFullscreen(gamecanvas);
 
     gamesession = true;
     game_time_counter = 0;
