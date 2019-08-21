@@ -62,7 +62,7 @@ function player_movement() {
                 //SMARTPHONE form factor
 
                 //if a player is in the goal
-                if (players[i].y - players[i].radius < goal_post.y1 + goal_post.height || players[i].y + players[i].radius > goal_post.y2) {
+                if (players[i].y - players[i].radius < goal_post.y1 + goal_post.height - 10 || players[i].y + players[i].radius > goal_post.y2 + 10) {
                     //contact with goal post
                     if (players[i].x + players[i].radius >= goal_post.x1 + goal_post.width - 10 && players[i].unit_x > 0) {
                         players[i].unit_x = -players[i].unit_x;
@@ -72,10 +72,10 @@ function player_movement() {
                 }
 
                 //if a player is headed for the goal
-                if (players[i].y - players[i].radius <= outside_pitch.side + 2 && players[i].unit_y < 0 &&
+                if (players[i].y - players[i].radius <= goal_post.y1 + goal_post.height && players[i].unit_y < 0 &&
                     players[i].x - players[i].radius - 5 > goal_post.x1 && players[i].x + players[i].radius + 5 < goal_post.x1 + goal_post.width) {
 
-                } else if (players[i].y + players[i].radius >= outside_pitch.side + play_area.height - 2 && players[i].unit_y > 0 &&
+                } else if (players[i].y + players[i].radius >= goal_post.y2 && players[i].unit_y > 0 &&
                     players[i].x - players[i].radius - 5 > goal_post.x1 && players[i].x + players[i].radius + 5 < goal_post.x1 + goal_post.width) {
 
                 }
@@ -93,21 +93,28 @@ function player_movement() {
 
                 //check for ball contact with field boundary
                 //if the ball is in the goal
-                if (ball.y < outside_pitch.side || ball.y + ball.dimensions > outside_pitch.side + play_area.height) {
+                if (ball.y < goal_post.y1 + goal_post.height - 5 || ball.y + ball.dimensions > goal_post.y2 + 5) {
                     //GOOAAAAAAL!!!!
                     if (ball.y + ball.dimensions < goal_post.y1 + goal_post.height) {
                         goal();
                         score_keeper('away');
+
+                        //contact with goal post
+                        if (ball.x + ball.dimensions >= goal_post.x1 + goal_post.width - 10 && ball.unit_x > 0) {
+                            ball.unit_x = -ball.unit_x;
+                        } else if (ball.x <= goal_post.x1 + 10 && ball.unit_x < 0) {
+                            ball.unit_x = -ball.unit_x;
+                        }
                     } else if (ball.y > goal_post.y2) {
                         goal();
                         score_keeper('home');
-                    }
 
-                    //contact with goal post
-                    if (ball.x + ball.dimensions >= goal_post.x1 + goal_post.width - 10 && ball.unit_x > 0) {
-                        ball.unit_x = -ball.unit_x;
-                    } else if (ball.x <= goal_post.x1 + 10 && ball.unit_x < 0) {
-                        ball.unit_x = -ball.unit_x;
+                        //contact with goal post
+                        if (ball.x + ball.dimensions >= goal_post.x1 + goal_post.width - 10 && ball.unit_x > 0) {
+                            ball.unit_x = -ball.unit_x;
+                        } else if (ball.x <= goal_post.x1 + 10 && ball.unit_x < 0) {
+                            ball.unit_x = -ball.unit_x;
+                        }
                     }
                 }
 

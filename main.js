@@ -143,7 +143,7 @@ function gameplay() {
         game_time_counter++;
 
         //try adjusting the screen after every several frames just incase it was changed to/from fullscreen
-        if (game_time_counter % 100 == 0) {
+        if (game_time_counter % 60 == 0) {
             if (gamecanvas.height != window.innerHeight || gamecanvas.width != window.innerWidth) {
                 adjust_to_fullscreen();
             }
@@ -209,7 +209,7 @@ function score_keeper(scorer) {
         //on smartphone (potrait displays)
         ctx.save();
         ctx.rotate(90 * Math.PI / 180);
-        ctx.fillText(`${home_score} : ${away_score}`, scores_display.x, scores_display.y);
+        ctx.fillText(`${home_score} - ${away_score}`, scores_display.x, scores_display.y);
         ctx.restore();
     }
 }
