@@ -168,11 +168,11 @@ let game_time_counter;;
 function gameplay() {
 
     player_movement();
+    time_displayer();
 
     if (gamesession) {
         //increase the value of the counter
         game_time_counter++;
-        time_displayer();
 
         //try adjusting the screen after every several frames just incase it was changed to/from fullscreen
         if (game_time_counter % 60 == 0) {
