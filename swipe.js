@@ -23,6 +23,7 @@ ontouch = (first_x, first_y) => {
                 gamesession = false;
                 document.getElementById("game_div").removeChild(gamecanvas);
                 change_display("main_menu");
+                clearInterval(timer); //stop the timer
                 break;
             }
 

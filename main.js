@@ -103,7 +103,7 @@ function circle_drawer() {
 
     //the back, pause and play buttons
     ctx.drawImage(back_button.image, back_button.x, back_button.y, back_button.width, back_button.height);
-    ctx.drawImage(fullscreen_button.image, fullscreen_button.x, fullscreen_button.y, fullscreen_button.width, fullscreen_button.height);
+    //ctx.drawImage(fullscreen_button.image, fullscreen_button.x, fullscreen_button.y, fullscreen_button.width, fullscreen_button.height);
 
     if (gamesession) {
         ctx.drawImage(pause_button.image, pause_button.x, pause_button.y, pause_button.width, pause_button.height);
@@ -248,14 +248,14 @@ function score_keeper(scorer) {
 
 
 //keeps track of time in the game
-let remaining_time;
+let remaining_time, timer;
 let time_keeper = () => {
 
     remaining_time = game_duration
-    setInterval(() => {
+    timer = setInterval(() => {
         if (remaining_time == 0) {
             //if time's up
-            clearInterval(this);
+            clearInterval(timer);
         } else {
             if (gamesession) {
                 //if there is still time remaining

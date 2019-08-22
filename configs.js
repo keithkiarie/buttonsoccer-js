@@ -252,7 +252,7 @@ config = () => {
         back_button,
         pause_button,
         play_button,
-        fullscreen_button
+        //fullscreen_button
     ];
 }
 
