@@ -49,6 +49,7 @@ config = () => {
     }
 
 
+
     //the area that is occupied by the pitch
     //PLAY AREA
     if (gamecanvas.height > gamecanvas.width) {
@@ -93,8 +94,8 @@ config = () => {
             y2: outside_pitch.side + play_area.height - 10
         }
         //if it is in full screen mode
-        if (document.fullscreen || window.innerHeight == screen.avalHeight) {
-            goal_post.y2 = screen.avalHeight - outside_pitch.side - 10;
+        if (document.fullscreen || window.innerHeight == screen.availHeight) {
+            goal_post.y2 = screen.availHeight - outside_pitch.side - 10;
         }
     }
 
@@ -112,8 +113,8 @@ config = () => {
             y: (gamecanvas.height / 2) - (ball_dimensions / 2)
         }
         //if it is in full screen mode
-        if (document.fullscreen || window.innerHeight == screen.avalHeight) {
-            ball_initial_position.y = (screen.avalHeight / 2) - (ball_dimensions / 2);
+        if (document.fullscreen || window.innerHeight == screen.availHeight) {
+            ball_initial_position.y = (screen.availHeight / 2) - (ball_dimensions / 2);
         }
     }
 
@@ -137,8 +138,8 @@ config = () => {
         scores_display.y = -play_area.width;
 
         //if it is in full screen mode
-        if (document.fullscreen || window.innerHeight == screen.avalHeight) {
-            scores_display.x = screen.avalHeight / 2;
+        if (document.fullscreen || window.innerHeight == screen.availHeight) {
+            scores_display.x = screen.availHeight / 2;
         }
     }
 
