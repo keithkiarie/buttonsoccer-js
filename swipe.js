@@ -1,6 +1,6 @@
 //called by Swipe_Listener after it has collected details about the swipe
 onswipe = (transformation) => {
-    if (typeof (closest.id) == 'number') {
+    if (typeof (closest.id) == 'number' && gamesession) {
         players[closest.id].unit_x = transformation.x / transformation.duration;
         players[closest.id].unit_y = transformation.y / transformation.duration;
     }
@@ -83,7 +83,7 @@ ontouch = (first_x, first_y) => {
     }
 
     //action on the object that is decided to be the one intended by the user
-    if (typeof (closest.id) == 'number') {
+    if (typeof (closest.id) == 'number' && gamesession) {
         players[closest.id].unit_x = 0;
         players[closest.id].unit_y = 0;
     }
