@@ -158,6 +158,7 @@ function start_game() {
 
     gamesession = true;
     game_time_counter = 0;
+    time_keeper();
     requestAnimationFrame(gameplay);
 }
 
@@ -171,6 +172,7 @@ function gameplay() {
     if (gamesession) {
         //increase the value of the counter
         game_time_counter++;
+        time_displayer();
 
         //try adjusting the screen after every several frames just incase it was changed to/from fullscreen
         if (game_time_counter % 60 == 0) {
@@ -242,4 +244,87 @@ function score_keeper(scorer) {
         ctx.fillText(`${home_score} - ${away_score}`, scores_display.x, scores_display.y);
         ctx.restore();
     }
+}
+
+
+//keeps track of time in the game
+let remaining_time;
+let time_keeper = () => {
+
+    remaining_time = game_duration
+    setInterval(() => {
+        if (remaining_time == 0) {
+            //if time's up
+            clearInterval(this);
+        } else {
+            if (gamesession) {
+                //if there is still time remaining
+                remaining_time--;
+            }
+        }
+    }, 1000);
+
+}
+
+function time_displayer() {
+    let color;
+
+    //change color according to the time remaining
+    remaining_time < 10 ? color = time_display.time_up_color : color = time_display.color;
+
+    //display the scores
+    ctx.font = time_display.font;
+    ctx.fillStyle = color;
+    ctx.textAlign = "center";
+
+    if (remaining_time == 0) {
+        //if time's up
+        time_up();
+
+    } else {
+        //if there is still time remaining
+        let minutes = Math.floor(remaining_time / 60).toFixed(0);
+        let seconds = remaining_time % 60;
+
+        //display time as two digits
+        seconds < 10 ? seconds = '0' + seconds : seconds = String(seconds);
+
+        if (window.innerWidth > window.innerHeight) {
+            //on laptops
+            ctx.fillText(`${minutes} : ${seconds}`, time_display.x, time_display.y);
+
+        } else {
+            //on smartphone (potrait displays)
+            ctx.save();
+            ctx.rotate(90 * Math.PI / 180);
+            ctx.fillText(`${minutes} : ${seconds}`, time_display.x, time_display.y);
+            ctx.restore();
+        }
+    }
+}
+
+
+//gets called when the given time for a match has elapsed
+function time_up() {
+
+
+    if (window.innerWidth > window.innerHeight) {
+        //on laptops
+        ctx.fillText(`Time's Up!`, time_display.x, time_display.y);
+
+    } else {
+        //on smartphone (potrait displays)
+        ctx.save();
+        ctx.rotate(90 * Math.PI / 180);
+        ctx.fillText(`Time's Up!`, time_display.x, time_display.y);
+        ctx.restore();
+    }
+
+    //stop the game
+    gamesession = false;
+
+    setTimeout(function () {
+        document.getElementById("game_div").removeChild(gamecanvas);
+        change_display("main_menu");
+    }, 2000);
 }

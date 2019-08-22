@@ -39,13 +39,12 @@ ontouch = (first_x, first_y) => {
                 break;
             }
 
-            //play button (it is in the same position as pause)
+            //fullscreen button
             if (buttons[i].name == 'fullscreen_button') {
                 if (document.fullscreen || window.innerHeight == screen.availHeight) {
                     closeFullscreen();
                 } else {
-                    openFullscreen(document.documentElement);
-                    
+                    openFullscreen(document.documentElement);  
                 }
                 break;
             }

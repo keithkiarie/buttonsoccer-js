@@ -1,5 +1,7 @@
 let players_number = 6; //has to be an even number
 
+let game_duration = 60; //number of seconds a match lasts
+
 let player_friction = 0.995;
 let ball_friction = 0.999;
 
@@ -16,7 +18,7 @@ let touch_allowance = 25;
 
 
 //all the variables set inside the config function
-let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button;
+let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button, time_display;
 
 //config is called in the other scripts to reinitialize all the variables under this function
 config = () => {
@@ -124,22 +126,37 @@ config = () => {
         font: `${outside_pitch.top}px Arial`,
         color: "black",
 
-        x: outside_pitch.side + (play_area.width / 2) - 45,
-        y: outside_pitch.top
+        //see x and y below
+    };
+
+    //the way time is displayed
+    time_display = {
+        font: `${outside_pitch.top}px Arial`,
+        color: "green",
+        time_up_color: "red"
+
+        //see x and y below
     };
 
     if (window.innerWidth > window.innerHeight) {
         //laptops
         scores_display.x = gamecanvas.width / 2;
         scores_display.y = outside_pitch.top;
+
+        time_display.x = gamecanvas.width * 0.80;
+        time_display.y = outside_pitch.top;
     } else {
         //smartphone
         scores_display.x = gamecanvas.height / 2;
         scores_display.y = -play_area.width;
 
+        time_display.x = gamecanvas.height * 0.80;
+        time_display.y = -play_area.width;
+
         //if it is in full screen mode
         if (document.fullscreen || window.innerHeight == screen.availHeight) {
             scores_display.x = screen.availHeight / 2;
+            time_display.x = screen.availHeight * 0.80;
         }
     }
 
