@@ -13,6 +13,10 @@
             height: 100%;
             overflow: hidden
         }
+
+        canvas {
+            touch-action: none;
+        }
     </style>
 </head>
 
@@ -51,32 +55,34 @@
         <img id="back_button_flipped" width="50" height="50" src="images/buttons/back_button_flipped.png" alt="Back">
         <img id="pause_button_flipped" width="50" height="50" src="images/buttons/pause_button_flipped.png" alt="Pause">
         <img id="play_button_flipped" width="50" height="50" src="images/buttons/play_button_flipped.png" alt="Play">
-        <img id="fullscreen_button_flipped" width="50" height="50" src="images/buttons/fullscreen_button_flipped.jpg" alt="Full Screen">
+        <img id="fullscreen_button_flipped" width="50" height="50" src="images/buttons/fullscreen_button_flipped.jpg"
+            alt="Full Screen">
     </div>
+
+    <script>
+        let gamecanvas = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+
+        let screen_dimensions = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+
+        let players = [];
+        let ball;
+        let gamesession = false;
+        let ctx; //drawing context
+        let swipe_listener;
+    </script>
+
+    <script src="configs.js"></script>
+    <script src="swipe.js"></script>
+    <script src="player.js"></script>
+    <script src="collision.js"></script>
+    <script src="main.js"></script>
+
 </body>
-
-<script>
-    let gamecanvas = {
-        width: window.innerWidth,
-        height: window.innerHeight
-    };
-
-    let screen_dimensions = {
-        width: window.innerWidth,
-        height: window.innerHeight
-    };
-
-    let players = [];
-    let ball;
-    let gamesession = false;
-    let ctx; //drawing context
-    let swipe_listener;
-</script>
-
-<script src="configs.js"></script>
-<script src="swipe.js"></script>
-<script src="player.js"></script>
-<script src="collision.js"></script>
-<script src="main.js"></script>
 
 </html>
