@@ -173,7 +173,7 @@ function player_movement() {
 
                 //check for ball contact with field boundary
                 //if the ball is in the goal
-                if (ball.x < outside_pitch.side || ball.x + ball.dimensions > outside_pitch.side + play_area.width) {
+                if (ball.x < outside_pitch.side - 5 || ball.x + ball.dimensions > outside_pitch.side + play_area.width) {
 
                     //GOOAAAAAAL!!!!
                     if (ball.x + ball.dimensions < outside_pitch.side) {
