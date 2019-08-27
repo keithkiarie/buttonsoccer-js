@@ -45,7 +45,7 @@ ontouch = (first_x, first_y) => {
                 if (document.fullscreen || window.innerHeight == screen.availHeight) {
                     closeFullscreen();
                 } else {
-                    openFullscreen(document.documentElement);  
+                    openFullscreen(document.documentElement);
                 }
                 break;
             }
@@ -144,3 +144,54 @@ function Swipe_Listener(swiping_area) {
         onswipe(obj.transformation);
     };
 }
+
+
+let ui_first_x, ui_first_y, ui_current_x, ui_current_y;
+function ui_touch_listener() {
+
+    //touch has started
+    ui_canvas.addEventListener('touchstart', function (e) {
+        ui_first_x = event.touches[0].clientX;
+        ui_first_y = event.touches[0].clientY;
+
+        //call touch_stop after a certain duration of listening to the touch
+        setTimeout(() => ui_touch_stop(), touch_duration);
+    });
+
+    //swiping
+    ui_canvas.addEventListener('touchmove', function (e) {
+        ui_current_x = e.changedTouches[0].pageX;
+        ui_current_y = e.changedTouches[0].pageY;
+    });
+}
+
+function ui_touch_stop() {
+    //look for a swipe
+    if (window.innerWidth > window.innerHeight) {
+        //laptop
+
+        if (ui_current_x > ui_first_x) {
+            //left swipe
+            ui_swiped = 'right'
+        } else if (ui_current_x < ui_first_x) {
+            //right swipe
+            ui_swiped = 'left';
+        } else if (ui_first_y == ui_current_y) {
+            //tap
+        }
+    } else {
+        //smartphone
+
+        if (ui_current_y > ui_first_y) {
+            //left swipe
+            ui_swiped = 'right';
+        } else if (ui_current_y < ui_first_y) {
+            //right swipe
+            ui_swiped = 'left';
+        } else if (ui_first_x == ui_current_x) {
+            //tap
+        }
+    }
+}
+
+ui_touch_listener();

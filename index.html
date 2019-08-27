@@ -18,23 +18,20 @@
             touch-action: none;
         }
 
-        #main_menu {
-            background-image: url('images/grass/grass.jpg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            height: 100%;
-        }
     </style>
 </head>
 
 <body>
+    <!--Main Menu-->
     <div id="main_menu">
-        <br><br>
+        <!--
+<br><br>
         <button id="start_game" onclick="start_game()">Start</button>
         <button id="full_screen" onclick="openFullscreen(document.documentElement)">Full Screen</button>
+        -->
     </div>
 
+    <!--Game div-->
     <div id="game_div" style="display:none;"></div>
 
     <div id="images_loader" style="display:none;">
@@ -53,6 +50,8 @@
 
         <img id="net1_potrait" src="images/net/net1_potrait.png" width="100" height="100" alt="net">
         <img id="net2_potrait" src="images/net/net1_potrait_flipped.png" width="100" height="100" alt="net2">
+        
+        <img id="ui_grass" src="images/grass/grass.jpg" width="100" height="100" alt="Grass">
 
         <!--Images serving as buttons. All buttons added to the canvas should be added to the buttons array in configs.js-->
         <img id="back_button" width="50" height="50" src="images/buttons/back_button.png" alt="Back">
@@ -68,6 +67,13 @@
     </div>
 
     <script>
+        //object for the canvas of the user interface
+        let ui_canvas = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+
+        //object for the canvas where the game is played
         let gamecanvas = {
             width: window.innerWidth,
             height: window.innerHeight
@@ -82,10 +88,15 @@
         let ball;
         let gamesession = false;
         let ctx; //drawing context
-        let swipe_listener;
+        let ui_ctx;
+        let swipe_listener; //swipe event listener for the game canvas
+        let ui_swipe_canvas;  //swipe event listener for the user interface
+
+        let ui_swiped = false; //if the ui has been swiped and the buttons animation should happen
     </script>
 
     <script src="configs.js"></script>
+    <script src="ui.js"></script>
     <script src="swipe.js"></script>
     <script src="player.js"></script>
     <script src="collision.js"></script>

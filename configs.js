@@ -16,9 +16,18 @@ let ball_grease = 5; //smoothens ball movement
 let touch_duration = 200;
 let touch_allowance = 25;
 
+let ui_swipe_speed; //animation speed when the UI is swiped
+if (window.innerHeight > window.innerWidth) {
+    //smartphone
+    ui_swipe_speed = window.innerHeight / 20;
+} else {
+    //laptop
+    ui_swipe_speed = window.innerWidth / 20;
+}
+
 
 //all the variables set inside the config function
-let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button, time_display;
+let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button, time_display, ui_buttons, constant_ui_buttons_position;
 
 //config is called in the other scripts to reinitialize all the variables under this function
 config = () => {
@@ -254,6 +263,140 @@ config = () => {
         play_button,
         //fullscreen_button
     ];
+
+    //ui_buttons
+    if (window.innerWidth > window.innerHeight) {
+        //LAPTOPS
+
+        constant_ui_buttons_position = [
+            //left button
+            {
+                cx: window.innerWidth * (1 / 5),
+                cy: window.innerHeight / 2,
+            },
+            //center button
+            {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight / 2,
+            },
+            //right button
+            {
+                cx: window.innerWidth * (4 / 5),
+                cy: window.innerHeight / 2,
+            },
+        ];
+
+        ui_buttons = {
+            single_player: {
+                //text positioning is dependant on the circle positioning as described during drawing
+
+                //circle positioning
+                cx: window.innerWidth * (1 / 5),
+                cy: window.innerHeight / 2,
+                radius: window.innerHeight * (1 / 7),
+                color: "blue",
+
+                text_1: "Single",
+                text_2: "Player",
+                page: 1
+            },
+            two_player: {
+                //text positioning is dependant on the circle positioning as described during drawing
+
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight / 2,
+                radius: window.innerHeight * (1 / 7),
+                color: "blue",
+
+                text_1: "Two",
+                text_2: "Player",
+                page: 1
+            },
+            multiplayer: {
+                //text positioning is dependant on the circle positioning as described during drawing
+
+                cx: window.innerWidth * (4 / 5),
+                cy: window.innerHeight / 2,
+                radius: window.innerHeight * (1 / 7),
+                color: "blue",
+
+                text_1: "Multi",
+                text_2: "Player",
+                page: 1
+            },
+            fullscreen: { page: 2 },
+            settings: { page: 2 },
+            mute: { page: 2 }
+        };
+    } else {
+        //SMARTPHONE
+
+
+        constant_ui_buttons_position = [
+            //left button
+            {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight * (1 / 5)
+            },
+            //center button
+            {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight / 2
+            },
+            //right button
+            {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight * (4 / 5)
+            }
+        ];
+
+        ui_buttons = {
+
+            single_player: {
+                //text positioning is dependant on the circle positioning as described during drawing
+
+                //circle positioning
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight * (1 / 5),
+                radius: window.innerWidth * (1 / 7),
+                color: "blue",
+
+                text_1: "Single",
+                text_2: "Player",
+                page: 1,
+                number: 0
+            },
+            two_player: {
+                //text positioning is dependant on the circle positioning as described during drawing
+
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight / 2,
+                radius: window.innerWidth * (1 / 7),
+                color: "blue",
+
+                text_1: "Two",
+                text_2: "Player",
+                page: 1,
+                number: 1
+            },
+            multiplayer: {
+                //text positioning is dependant on the circle positioning as described during drawing
+
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight * (4 / 5),
+                radius: window.innerWidth * (1 / 7),
+                color: "blue",
+
+                text_1: "Multi",
+                text_2: "Player",
+                page: 1,
+                number: 2
+            },
+            fullscreen: { page: 2 },
+            settings: { page: 2 },
+            mute: { page: 2 }
+        };
+    }
 }
 
 config();
