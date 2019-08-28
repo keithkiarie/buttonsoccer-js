@@ -11,7 +11,8 @@ ui_canvas.height = window.innerHeight;
 ui_ctx = ui_canvas.getContext("2d");
 
 document.getElementById("main_menu").appendChild(ui_canvas);
-//ui_swipe_listener = new Swipe_Listener(ui_canvas);
+
+let positions_before_swipe = [];
 
 function draw_ui() {
     if (in_main_menu) {
@@ -21,7 +22,7 @@ function draw_ui() {
         //write the ui buttons
         for (i in ui_buttons) {
 
-            if (ui_buttons[i].page == 1) {
+            if (ui_buttons[i].page != "all") {
                 ui_ctx.beginPath();
                 ui_ctx.arc(ui_buttons[i].cx, ui_buttons[i].cy, ui_buttons[i].radius, 0, 2 * Math.PI);
                 ui_ctx.stroke();
@@ -37,30 +38,43 @@ function draw_ui() {
                     ui_ctx.save();
                     ui_ctx.rotate(90 * Math.PI / 180);
 
-                    ui_ctx.fillText(ui_buttons[i].text_1, ui_buttons[i].cy - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), (-ui_buttons[i].cx));
-                    ui_ctx.fillText(ui_buttons[i].text_2, ui_buttons[i].cy - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), (-ui_buttons[i].cx) + 20);
+                    if (ui_buttons[i].text_1 != undefined) {
+                        ui_ctx.fillText(ui_buttons[i].text_1, ui_buttons[i].cy - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), (-ui_buttons[i].cx));
+                        ui_ctx.fillText(ui_buttons[i].text_2, ui_buttons[i].cy - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), (-ui_buttons[i].cx) + 20);
+                    } else {
+                        ui_ctx.fillText(ui_buttons[i].text, ui_buttons[i].cy - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), (-ui_buttons[i].cx));
+                    }
+
 
                     ui_ctx.restore();
 
-                    if (ui_swiped == 'right' && ui_buttons[i].cy < constant_ui_buttons_position[ui_buttons[i].number].cy + window.innerHeight) {
+                    //move the buttons on swipe
+                    if (ui_swiped == 'right' && ui_buttons[i].cy < ui_buttons[i].defaults.page_1.cy) {
                         ui_buttons[i].cy += ui_swipe_speed;
-                    } else if (ui_swiped == 'left' && ui_buttons[i].cy > constant_ui_buttons_position[ui_buttons[i].number].cy - window.innerHeight) {
+
+                    } else if (ui_swiped == 'left' && ui_buttons[i].cy > ui_buttons[i].defaults.page_2.cy) {
                         ui_buttons[i].cy -= ui_swipe_speed;
                     }
 
                 } else {
                     //on LAPTOPS
 
-                    ui_ctx.fillText(ui_buttons[i].text_1, ui_buttons[i].cx - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), ui_buttons[i].cy);
-                    ui_ctx.fillText(ui_buttons[i].text_2, ui_buttons[i].cx - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), ui_buttons[i].cy + 20);
+                    if (ui_buttons[i].text_1 != undefined) {
+                        ui_ctx.fillText(ui_buttons[i].text_1, ui_buttons[i].cx - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), ui_buttons[i].cy);
+                        ui_ctx.fillText(ui_buttons[i].text_2, ui_buttons[i].cx - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), ui_buttons[i].cy + 20);
+                    } else {
+                        ui_ctx.fillText(ui_buttons[i].text, ui_buttons[i].cx - (ui_ctx.measureText(ui_buttons[i].text_1).width / 2), ui_buttons[i].cy);
+                    }
 
-                    //move the buttons
-                    if (ui_swiped == 'right') {
+                    //move the buttons on swipe
+                    if (ui_swiped == 'right' && ui_buttons[i].cx < ui_buttons[i].defaults.page_1.cx) {
                         ui_buttons[i].cx += ui_swipe_speed;
-                    } else if (ui_swiped == 'left') {
+
+                    } else if (ui_swiped == 'left' && ui_buttons[i].cx > ui_buttons[i].defaults.page_2.cx) {
                         ui_buttons[i].cx -= ui_swipe_speed;
                     }
                 }
+
 
             }
         }

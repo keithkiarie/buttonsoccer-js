@@ -27,7 +27,7 @@ if (window.innerHeight > window.innerWidth) {
 
 
 //all the variables set inside the config function
-let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button, time_display, ui_buttons, constant_ui_buttons_position;
+let player_radius, outside_pitch, play_area, goal_post, ball_dimensions, ball_initial_position, scores_display, buttons, back_button, pause_button, play_button, fullscreen_button, time_display, ui_buttons;
 
 //config is called in the other scripts to reinitialize all the variables under this function
 config = () => {
@@ -268,23 +268,6 @@ config = () => {
     if (window.innerWidth > window.innerHeight) {
         //LAPTOPS
 
-        constant_ui_buttons_position = [
-            //left button
-            {
-                cx: window.innerWidth * (1 / 5),
-                cy: window.innerHeight / 2,
-            },
-            //center button
-            {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight / 2,
-            },
-            //right button
-            {
-                cx: window.innerWidth * (4 / 5),
-                cy: window.innerHeight / 2,
-            },
-        ];
 
         ui_buttons = {
             single_player: {
@@ -298,7 +281,19 @@ config = () => {
 
                 text_1: "Single",
                 text_2: "Player",
-                page: 1
+                page: 1,
+                number: 0,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth * (1 / 5),
+                        cy: window.innerHeight / 2
+                    },
+                    page_2: {
+                        cx: window.innerWidth * (1 / 5) - window.innerWidth,
+                        cy: window.innerHeight / 2
+                    },
+                }
             },
             two_player: {
                 //text positioning is dependant on the circle positioning as described during drawing
@@ -310,7 +305,19 @@ config = () => {
 
                 text_1: "Two",
                 text_2: "Player",
-                page: 1
+                page: 1,
+                number: 1,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight / 2
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2 - window.innerWidth,
+                        cy: window.innerHeight / 2
+                    },
+                }
             },
             multiplayer: {
                 //text positioning is dependant on the circle positioning as described during drawing
@@ -322,33 +329,90 @@ config = () => {
 
                 text_1: "Multi",
                 text_2: "Player",
-                page: 1
+                page: 1,
+                number: 2,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth * (4 / 5),
+                        cy: window.innerHeight / 2
+                    },
+                    page_2: {
+                        cx: window.innerWidth * (4 / 5) - window.innerWidth,
+                        cy: window.innerHeight / 2
+                    },
+                }
+            },//next page
+            tournament: {
+                cx: window.innerWidth * (1 / 5) + window.innerWidth,
+                cy: window.innerHeight / 2,
+                radius: window.innerHeight * (1 / 7),
+                color: "blue",
+
+                text: "Tournament",
+                page: 2,
+                number: 3,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth * (1 / 5) + window.innerWidth,
+                        cy: window.innerHeight / 2
+                    },
+                    page_2: {
+                        cx: window.innerWidth * (1 / 5),
+                        cy: window.innerHeight / 2
+                    },
+                }
             },
-            fullscreen: { page: 2 },
-            settings: { page: 2 },
-            mute: { page: 2 }
+            settings: {
+                cx: window.innerWidth / 2 + window.innerWidth,
+                cy: window.innerHeight / 2,
+                radius: window.innerHeight * (1 / 7),
+                color: "blue",
+
+                text: "Settings",
+                page: 2,
+                number: 4,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2 + window.innerWidth,
+                        cy: window.innerHeight / 2
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight / 2
+                    },
+                }
+            },
+            about: {
+                cx: window.innerWidth * (4 / 5) + window.innerWidth,
+                cy: window.innerHeight / 2,
+                radius: window.innerHeight * (1 / 7),
+                color: "blue",
+
+                text: "About",
+                page: 2,
+                number: 5,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth * (4 / 5) + window.innerWidth,
+                        cy: window.innerHeight / 2
+                    },
+                    page_2: {
+                        cx: window.innerWidth * (4 / 5),
+                        cy: window.innerHeight / 2
+                    },
+                }
+            },
+            //constant buttons
+            mute: { page: "all" },
+            fullscreen: { page: "all" }
         };
     } else {
         //SMARTPHONE
 
-
-        constant_ui_buttons_position = [
-            //left button
-            {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight * (1 / 5)
-            },
-            //center button
-            {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight / 2
-            },
-            //right button
-            {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight * (4 / 5)
-            }
-        ];
 
         ui_buttons = {
 
@@ -364,7 +428,18 @@ config = () => {
                 text_1: "Single",
                 text_2: "Player",
                 page: 1,
-                number: 0
+                number: 0,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (1 / 5),
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (1 / 5) - window.innerHeight,
+                    },
+                }
             },
             two_player: {
                 //text positioning is dependant on the circle positioning as described during drawing
@@ -377,7 +452,18 @@ config = () => {
                 text_1: "Two",
                 text_2: "Player",
                 page: 1,
-                number: 1
+                number: 1,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight / 2,
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight / 2 - window.innerHeight,
+                    },
+                }
             },
             multiplayer: {
                 //text positioning is dependant on the circle positioning as described during drawing
@@ -390,11 +476,86 @@ config = () => {
                 text_1: "Multi",
                 text_2: "Player",
                 page: 1,
-                number: 2
+                number: 2,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (4 / 5),
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (4 / 5) - window.innerHeight,
+                    },
+                }
             },
-            fullscreen: { page: 2 },
-            settings: { page: 2 },
-            mute: { page: 2 }
+            //next page
+            tournament: {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight * (1 / 5) + window.innerHeight,
+                radius: window.innerWidth * (1 / 7),
+                color: "blue",
+
+                text: "Tournament",
+                page: 2,
+                number: 3,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (1 / 5) + window.innerHeight,
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (1 / 5),
+                    },
+                }
+            },
+            settings: {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight / 2 + window.innerHeight,
+                radius: window.innerWidth * (1 / 7),
+                color: "blue",
+
+                text: "Settings",
+                page: 2,
+                number: 4,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight / 2 + window.innerHeight,
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight / 2,
+                    },
+                }
+            },
+            about: {
+                cx: window.innerWidth / 2,
+                cy: window.innerHeight * (4 / 5),
+                radius: window.innerWidth * (1 / 7),
+                color: "blue",
+
+                text: "About",
+                page: 2,
+                number: 5,
+
+                defaults: {
+                    page_1: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (4 / 5) + window.innerHeight,
+                    },
+                    page_2: {
+                        cx: window.innerWidth / 2,
+                        cy: window.innerHeight * (4 / 5),
+                    },
+                }
+            },
+            //constant buttons
+            mute: { page: "all" },
+            fullscreen: { page: "all" }
         };
     }
 }

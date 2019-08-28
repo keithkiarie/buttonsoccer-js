@@ -166,29 +166,36 @@ function ui_touch_listener() {
 }
 
 function ui_touch_stop() {
-    //look for a swipe
+    positions_before_swipe = [];
+    //look for a swipe, no swiping past the last and first page
     if (window.innerWidth > window.innerHeight) {
         //laptop
 
-        if (ui_current_x > ui_first_x) {
-            //left swipe
-            ui_swiped = 'right'
-        } else if (ui_current_x < ui_first_x) {
+        if ((ui_current_x > ui_first_x) && ui_page == 2) {
             //right swipe
+
+            ui_swiped = 'right'
+            ui_page = 1;
+        } else if ((ui_current_x < ui_first_x) && ui_page == 1) {
+            //left swipe
             ui_swiped = 'left';
-        } else if (ui_first_y == ui_current_y) {
+            ui_page = 2;
+        } else if (ui_first_y == ui_current_y && ui_first_x == ui_current_x) {
             //tap
+            
         }
     } else {
         //smartphone
 
-        if (ui_current_y > ui_first_y) {
-            //left swipe
-            ui_swiped = 'right';
-        } else if (ui_current_y < ui_first_y) {
+        if ((ui_current_y > ui_first_y) && ui_page == 2) {
             //right swipe
+            ui_swiped = 'right';
+            ui_page = 1;
+        } else if ((ui_current_y < ui_first_y) && ui_page == 1) {
+            //left swipe
             ui_swiped = 'left';
-        } else if (ui_first_x == ui_current_x) {
+            ui_page = 2;
+        } else if (ui_first_x == ui_current_x && ui_first_y == ui_current_y) {
             //tap
         }
     }
