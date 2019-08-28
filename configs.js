@@ -534,7 +534,7 @@ config = () => {
             },
             about: {
                 cx: window.innerWidth / 2,
-                cy: window.innerHeight * (4 / 5),
+                cy: window.innerHeight * (4 / 5) + window.innerHeight,
                 radius: window.innerWidth * (1 / 7),
                 color: "blue",
 
@@ -558,6 +558,14 @@ config = () => {
             fullscreen: { page: "all" }
         };
     }
+    //naming the buttons
+    ui_buttons.single_player.name = "single_player";
+    ui_buttons.two_player.name = "two_player";
+    ui_buttons.multiplayer.name = "multiplayer";
+    ui_buttons.tournament.name = "tournament";
+    ui_buttons.settings.name = "settings";
+    ui_buttons.about.name = "about";
+
 }
 
 config();

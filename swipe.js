@@ -151,6 +151,10 @@ function ui_touch_listener() {
 
     //touch has started
     ui_canvas.addEventListener('touchstart', function (e) {
+        //clear previous touch record
+        ui_current_x = undefined;
+        ui_current_y = undefined;
+
         ui_first_x = event.touches[0].clientX;
         ui_first_y = event.touches[0].clientY;
 
@@ -169,36 +173,78 @@ function ui_touch_stop() {
     positions_before_swipe = [];
     //look for a swipe, no swiping past the last and first page
     if (window.innerWidth > window.innerHeight) {
-        //laptop
+        //LAPTOP
 
-        if ((ui_current_x > ui_first_x) && ui_page == 2) {
+        if ((ui_current_x > ui_first_x + 5) && ui_page == 2) {
             //right swipe
 
             ui_swiped = 'right'
             ui_page = 1;
-        } else if ((ui_current_x < ui_first_x) && ui_page == 1) {
+        } else if ((ui_current_x < ui_first_x - 5) && ui_page == 1) {
             //left swipe
             ui_swiped = 'left';
             ui_page = 2;
-        } else if (ui_first_y == ui_current_y && ui_first_x == ui_current_x) {
+        } else if (ui_current_x == undefined && ui_current_y == undefined) {
             //tap
-            
+            ui_tap();
         }
     } else {
         //smartphone
 
-        if ((ui_current_y > ui_first_y) && ui_page == 2) {
+        if ((ui_current_y > ui_first_y + 5) && ui_page == 2) {
             //right swipe
             ui_swiped = 'right';
             ui_page = 1;
-        } else if ((ui_current_y < ui_first_y) && ui_page == 1) {
+        } else if ((ui_current_y < ui_first_y - 5) && ui_page == 1) {
             //left swipe
             ui_swiped = 'left';
             ui_page = 2;
-        } else if (ui_first_x == ui_current_x && ui_first_y == ui_current_y) {
+        } else if (ui_current_x == undefined && ui_current_y == undefined) {
             //tap
+            ui_tap();
         }
     }
 }
 
 ui_touch_listener();
+
+function ui_tap() {
+    for (const i in ui_buttons) {
+        //check if a button is being pressed
+        if (ui_first_x > ui_buttons[i].cx - ui_buttons[i].radius && ui_first_x < ui_buttons[i].cx + ui_buttons[i].radius &&
+            ui_first_y > ui_buttons[i].cy - ui_buttons[i].radius && ui_first_y < ui_buttons[i].cy + ui_buttons[i].radius) {
+
+            
+            switch (ui_buttons[i].name) {
+                case "single_player":
+                    alert("Single Player Mode is still under development");
+                    break;
+
+                case "two_player":
+                    start_game();
+                    break;
+
+                case "multiplayer":
+                    alert("Multiplayer Mode is still under development");
+                    break;
+
+                case "tournament":
+                    alert("Tournament Mode is still under development");
+                    break;
+
+                case "settings":
+                    alert("Settings menu is still under development");
+                    break;
+
+                case "about":
+                    alert("What do you want to know??");
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+        }
+    }
+
+}

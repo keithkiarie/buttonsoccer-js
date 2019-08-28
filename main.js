@@ -197,7 +197,7 @@ function change_display(div_to_display) {
         }
     });
     
-    document.getElementById('main_menu').style.display = "none" ? in_main_menu = false : in_main_menu = true;
+    document.getElementById('main_menu').style.display == "none" ? in_main_menu = false : in_main_menu = true;
     if (in_main_menu) {
         draw_ui();
     }
