@@ -211,10 +211,14 @@ ui_touch_listener();
 function ui_tap() {
     for (const i in ui_buttons) {
         //check if a button is being pressed
-        if (ui_first_x > ui_buttons[i].cx - ui_buttons[i].radius && ui_first_x < ui_buttons[i].cx + ui_buttons[i].radius &&
-            ui_first_y > ui_buttons[i].cy - ui_buttons[i].radius && ui_first_y < ui_buttons[i].cy + ui_buttons[i].radius) {
+        if (//curcular buttons
+            (ui_first_x > ui_buttons[i].cx - ui_buttons[i].radius && ui_first_x < ui_buttons[i].cx + ui_buttons[i].radius &&
+                ui_first_y > ui_buttons[i].cy - ui_buttons[i].radius && ui_first_y < ui_buttons[i].cy + ui_buttons[i].radius) ||
+            //square buttons
+            (ui_first_x > ui_buttons[i].x && ui_first_x < ui_buttons[i].x + ui_buttons[i].width &&
+                ui_first_y > ui_buttons[i].y && ui_first_y < ui_buttons[i].y + ui_buttons[i].height)) {
 
-            
+
             switch (ui_buttons[i].name) {
                 case "single_player":
                     alert("Single Player Mode is still under development");
@@ -238,6 +242,10 @@ function ui_tap() {
 
                 case "about":
                     alert("What do you want to know??");
+                    break;
+
+                case "fullscreen":
+                    openFullscreen(document.documentElement);
                     break;
 
                 default:

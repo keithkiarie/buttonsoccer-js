@@ -219,16 +219,16 @@ config = () => {
         back_button = {
             name: "back_button",
             x: 0,
-            y: 0,
-            width: outside_pitch.top,
-            height: outside_pitch.top,
+            y: window.innerHeight - (outside_pitch.top * 1.5),
+            width: outside_pitch.top * 1.5,
+            height: outside_pitch.top * 1.5,
             image: document.getElementById("back_button")
         };
 
         //pause button
         pause_button = {
             name: "pause_button",
-            x: outside_pitch.top,
+            x: 0,
             y: 0,
             width: outside_pitch.top,
             height: outside_pitch.top,
@@ -238,7 +238,7 @@ config = () => {
         //play button
         play_button = {
             name: "play_button",
-            x: outside_pitch.top,
+            x: 0,
             y: 0,
             width: outside_pitch.top,
             height: outside_pitch.top,
@@ -261,7 +261,7 @@ config = () => {
         back_button,
         pause_button,
         play_button,
-        //fullscreen_button
+        fullscreen_button
     ];
 
     //ui_buttons
@@ -407,8 +407,14 @@ config = () => {
                 }
             },
             //constant buttons
-            mute: { page: "all" },
-            fullscreen: { page: "all" }
+            fullscreen: {
+                x: window.innerWidth - 30,
+                y: window.innerHeight - 30,
+                width: 30,
+                height: 30,
+                img: document.getElementById("fullscreen_button"),
+                page: "all",
+            }
         };
     } else {
         //SMARTPHONE
@@ -554,8 +560,14 @@ config = () => {
                 }
             },
             //constant buttons
-            mute: { page: "all" },
-            fullscreen: { page: "all" }
+            fullscreen: {
+                x: 0,
+                y: window.innerHeight - 40,
+                width: 40,
+                height: 40,
+                img: document.getElementById("fullscreen_button_flipped"),
+                page: "all",
+            }
         };
     }
     //naming the buttons
@@ -565,6 +577,7 @@ config = () => {
     ui_buttons.tournament.name = "tournament";
     ui_buttons.settings.name = "settings";
     ui_buttons.about.name = "about";
+    ui_buttons.fullscreen.name = "fullscreen";
 
 }
 

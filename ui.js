@@ -22,6 +22,7 @@ function draw_ui() {
         //write the ui buttons
         for (i in ui_buttons) {
 
+            //buttons that only appear in one page
             if (ui_buttons[i].page != "all") {
                 ui_ctx.beginPath();
                 ui_ctx.arc(ui_buttons[i].cx, ui_buttons[i].cy, ui_buttons[i].radius, 0, 2 * Math.PI);
@@ -76,6 +77,10 @@ function draw_ui() {
                 }
 
 
+            } else {
+                //buttons that appear in all the pages of the UI
+
+                ui_ctx.drawImage(ui_buttons[i].img, ui_buttons[i].x, ui_buttons[i].y, ui_buttons[i].width, ui_buttons[i].height);
             }
         }
 
