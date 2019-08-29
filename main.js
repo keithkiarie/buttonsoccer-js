@@ -1,5 +1,9 @@
-function openFullscreen(elem) {
 
+function openFullscreen(elem) {
+    if (window.innerHeight == screen.height && window.innerWidth == screen.width) {
+        closeFullscreen();
+        return;
+    }
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.mozRequestFullScreen) { /* Firefox */
@@ -40,10 +44,11 @@ document.addEventListener("msfullscreenchange", function () {
 });
 
 function adjust_to_fullscreen() {
-    gamecanvas = {
-        width: window.innerWidth,
-        height: window.innerHeight
-    };
+    gamecanvas.width = window.innerWidth;
+    gamecanvas.height = window.innerHeight;
+
+    ui_canvas.width = window.innerWidth;
+    ui_canvas.height = window.innerHeight;
 
     //change the values of the configurations
     config();
@@ -103,7 +108,7 @@ function circle_drawer() {
 
     //the back, pause and play buttons
     ctx.drawImage(back_button.image, back_button.x, back_button.y, back_button.width, back_button.height);
-    //ctx.drawImage(fullscreen_button.image, fullscreen_button.x, fullscreen_button.y, fullscreen_button.width, fullscreen_button.height);
+    ctx.drawImage(fullscreen_button.image, fullscreen_button.x, fullscreen_button.y, fullscreen_button.width, fullscreen_button.height);
 
     if (gamesession) {
         ctx.drawImage(pause_button.image, pause_button.x, pause_button.y, pause_button.width, pause_button.height);
