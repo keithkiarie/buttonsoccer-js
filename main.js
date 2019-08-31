@@ -31,16 +31,16 @@ function closeFullscreen() {
 
 //listen for when the screen changes to full screen
 document.addEventListener("fullscreenchange", function () {
-    adjust_to_fullscreen();
+    setTimeout(function () { adjust_to_fullscreen(); }, 250);
 });
 document.addEventListener("mozfullscreenchange", function () {
-    adjust_to_fullscreen();
+    setTimeout(function () { adjust_to_fullscreen(); }, 250);
 });
 document.addEventListener("webkitfullscreenchange", function () {
-    adjust_to_fullscreen();
+    setTimeout(function () { adjust_to_fullscreen(); }, 250);
 });
 document.addEventListener("msfullscreenchange", function () {
-    adjust_to_fullscreen();
+    setTimeout(function () { adjust_to_fullscreen(); }, 250);
 });
 
 function adjust_to_fullscreen() {
@@ -50,13 +50,19 @@ function adjust_to_fullscreen() {
     ui_canvas.width = window.innerWidth;
     ui_canvas.height = window.innerHeight;
 
+    //if it is in full screen mode
+    if (document.fullscreen || window.innerHeight == screen.availHeight) {
+        ui_canvas.width = screen.availWidth;
+        ui_canvas.height = screen.availHeight;
+    }
+
     //change the values of the configurations
     config();
 
     //adjust the positions of the players and the ball
     for (let i = 0; i < players.length; i++) {
-        players[i].x *= window.innerWidth / screen_dimensions.width;
-        players[i].y *= window.innerHeight / screen_dimensions.height;
+        players[i].x *= gamecanvas.width / screen_dimensions.width;
+        players[i].y *= gamecanvas.height / screen_dimensions.height;
     }
 
     if (ball != undefined) {
@@ -69,6 +75,7 @@ function adjust_to_fullscreen() {
         width: window.innerWidth,
         height: window.innerHeight
     };
+
 }
 
 function create_canvas() {
@@ -180,7 +187,7 @@ function gameplay() {
         game_time_counter++;
 
         //try adjusting the screen after every several frames just incase it was changed to/from fullscreen
-        if (game_time_counter % 60 == 0) {
+        if (game_time_counter % 50 == 0) {
             if (gamecanvas.height != window.innerHeight || gamecanvas.width != window.innerWidth) {
                 adjust_to_fullscreen();
             }
@@ -201,7 +208,7 @@ function change_display(div_to_display) {
             document.getElementById(div).style.display = "none";
         }
     });
-    
+
     document.getElementById('main_menu').style.display == "none" ? in_main_menu = false : in_main_menu = true;
     if (in_main_menu) {
         draw_ui();

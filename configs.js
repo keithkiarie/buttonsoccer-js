@@ -118,6 +118,7 @@ config = () => {
             y: (play_area.height / 2) - ball_dimensions / 2 + outside_pitch.top
         }
     } else {
+        
         //smartphone
         ball_initial_position = {
             x: (play_area.width / 2) - (ball_dimensions / 2),
@@ -419,16 +420,15 @@ config = () => {
     } else {
         //SMARTPHONE
 
-
         ui_buttons = {
 
             single_player: {
                 //text positioning is dependant on the circle positioning as described during drawing
 
                 //circle positioning
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight * (1 / 5),
-                radius: window.innerWidth * (1 / 7),
+                cx: ui_canvas.width / 2,
+                cy: ui_canvas.height * (1 / 5),
+                radius: ui_canvas.width * (1 / 7),
                 color: "blue",
 
                 text_1: "Single",
@@ -438,21 +438,21 @@ config = () => {
 
                 defaults: {
                     page_1: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (1 / 5),
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (1 / 5),
                     },
                     page_2: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (1 / 5) - window.innerHeight,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (1 / 5) - ui_canvas.height,
                     },
                 }
             },
             two_player: {
                 //text positioning is dependant on the circle positioning as described during drawing
 
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight / 2,
-                radius: window.innerWidth * (1 / 7),
+                cx: ui_canvas.width / 2,
+                cy: ui_canvas.height / 2,
+                radius: ui_canvas.width * (1 / 7),
                 color: "blue",
 
                 text_1: "Two",
@@ -462,21 +462,21 @@ config = () => {
 
                 defaults: {
                     page_1: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight / 2,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height / 2,
                     },
                     page_2: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight / 2 - window.innerHeight,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height / 2 - ui_canvas.height,
                     },
                 }
             },
             multiplayer: {
                 //text positioning is dependant on the circle positioning as described during drawing
 
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight * (4 / 5),
-                radius: window.innerWidth * (1 / 7),
+                cx: ui_canvas.width / 2,
+                cy: ui_canvas.height * (4 / 5),
+                radius: ui_canvas.width * (1 / 7),
                 color: "blue",
 
                 text_1: "Multi",
@@ -486,20 +486,20 @@ config = () => {
 
                 defaults: {
                     page_1: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (4 / 5),
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (4 / 5),
                     },
                     page_2: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (4 / 5) - window.innerHeight,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (4 / 5) - ui_canvas.height,
                     },
                 }
             },
             //next page
             tournament: {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight * (1 / 5) + window.innerHeight,
-                radius: window.innerWidth * (1 / 7),
+                cx: ui_canvas.width / 2,
+                cy: ui_canvas.height * (1 / 5) + ui_canvas.height,
+                radius: ui_canvas.width * (1 / 7),
                 color: "blue",
 
                 text: "Tournament",
@@ -508,19 +508,19 @@ config = () => {
 
                 defaults: {
                     page_1: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (1 / 5) + window.innerHeight,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (1 / 5) + ui_canvas.height,
                     },
                     page_2: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (1 / 5),
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (1 / 5),
                     },
                 }
             },
             settings: {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight / 2 + window.innerHeight,
-                radius: window.innerWidth * (1 / 7),
+                cx: ui_canvas.width / 2,
+                cy: ui_canvas.height / 2 + ui_canvas.height,
+                radius: ui_canvas.width * (1 / 7),
                 color: "blue",
 
                 text: "Settings",
@@ -529,19 +529,19 @@ config = () => {
 
                 defaults: {
                     page_1: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight / 2 + window.innerHeight,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height / 2 + ui_canvas.height,
                     },
                     page_2: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight / 2,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height / 2,
                     },
                 }
             },
             about: {
-                cx: window.innerWidth / 2,
-                cy: window.innerHeight * (4 / 5) + window.innerHeight,
-                radius: window.innerWidth * (1 / 7),
+                cx: ui_canvas.width / 2,
+                cy: ui_canvas.height * (4 / 5) + ui_canvas.height,
+                radius: ui_canvas.width * (1 / 7),
                 color: "blue",
 
                 text: "About",
@@ -550,19 +550,19 @@ config = () => {
 
                 defaults: {
                     page_1: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (4 / 5) + window.innerHeight,
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (4 / 5) + ui_canvas.height,
                     },
                     page_2: {
-                        cx: window.innerWidth / 2,
-                        cy: window.innerHeight * (4 / 5),
+                        cx: ui_canvas.width / 2,
+                        cy: ui_canvas.height * (4 / 5),
                     },
                 }
             },
             //constant buttons
             fullscreen: {
                 x: 0,
-                y: window.innerHeight - 40,
+                y: ui_canvas.height - 40,
                 width: 40,
                 height: 40,
                 img: document.getElementById("fullscreen_button_flipped"),
