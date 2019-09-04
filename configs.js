@@ -1,12 +1,23 @@
 let players_number = 6; //has to be an even number
 
+let team_1_color = "#FF0000";
+let team_2_color = "#0000FF";
+
+//turn taking during gameplay
+let turn = 1;
+let turn_duration = 2500;
+//turn_indicator object manages the display indicator to show whose turn it is to play
+// more turn indicator to be found inside config() function
+let turn_indicator = {
+    team_1: {},
+    team_2: {}
+};
+
+
 let game_duration = 60; //number of seconds a match lasts
 
 let player_friction = 0.995;
 let ball_friction = 0.999;
-
-let team_1_color = "#FF0000";
-let team_2_color = "#0000FF";
 
 let speed = 12;
 let ball_id = ["ball_1", "ball_2", "ball_3", "ball_4", "ball_5"];
@@ -118,7 +129,7 @@ config = () => {
             y: (play_area.height / 2) - ball_dimensions / 2 + outside_pitch.top
         }
     } else {
-        
+
         //smartphone
         ball_initial_position = {
             x: (play_area.width / 2) - (ball_dimensions / 2),
@@ -169,6 +180,30 @@ config = () => {
             time_display.x = screen.availHeight * 0.80;
         }
     }
+
+    //turn indicators
+    if (window.innerWidth > window.innerHeight) {
+        //on laptops
+        turn_indicator.team_1.x = scores_display.x - 60;
+        turn_indicator.team_1.y = scores_display.y - 15;
+        turn_indicator.team_1.radius = 10;
+    
+        turn_indicator.team_2.x = scores_display.x + 60;
+        turn_indicator.team_2.y = scores_display.y - 15;
+        turn_indicator.team_2.radius = 10;
+    } else {
+        //on smartphones
+        turn_indicator.team_1.x = scores_display.x + 20;
+        turn_indicator.team_1.y = -scores_display.y - 60;
+        turn_indicator.team_1.radius = 10;
+    
+        turn_indicator.team_2.x = scores_display.x + 20;
+        turn_indicator.team_2.y = -scores_display.y + 35;
+        turn_indicator.team_2.radius = 10;
+    }
+    turn_indicator.team_1.color = team_1_color;
+    turn_indicator.team_2.color = team_2_color;
+    
 
     //back, pause, play and fullscreen buttons
     if (window.innerHeight > window.innerWidth) {

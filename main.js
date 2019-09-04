@@ -154,6 +154,15 @@ function circle_drawer() {
         ctx.drawImage(document.getElementById("net1_potrait"), goal_post.x1, goal_post.y1, goal_post.width, goal_post.height);
         ctx.drawImage(document.getElementById("net2_potrait"), goal_post.x2, goal_post.y2, goal_post.width, goal_post.height);
     }
+
+    //draw the turn indicator
+    ctx.beginPath();
+    ctx.arc(turn_indicator[`team_${turn}`].x, turn_indicator[`team_${turn}`].y, turn_indicator[`team_${turn}`].radius, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    ctx.fillStyle = turn_indicator[`team_${turn}`].color;
+    ctx.fill();
+
 }
 
 function start_game() {
@@ -166,9 +175,12 @@ function start_game() {
     home_score = 0;
     away_score = 0;
 
+
     circle_drawer();
 
     gamesession = true;
+
+    turn_taking(); //defined in player.js
     game_time_counter = 0;
     time_keeper();
     requestAnimationFrame(gameplay);

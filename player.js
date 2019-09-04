@@ -276,3 +276,19 @@ function player_movement() {
     }
     circle_drawer();
 }
+
+//switches the turn to play between the two teams every after a set duration
+function turn_taking() {
+    //if the game is being played
+    if (gamesession) {
+        setTimeout(function () {
+            if (turn == 1) {
+                turn = 2;
+            } else {
+                turn = 1;
+            }
+            
+            turn_taking();
+        }, turn_duration);
+    }
+}

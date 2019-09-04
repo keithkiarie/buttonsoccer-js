@@ -1,9 +1,11 @@
 //called by Swipe_Listener after it has collected details about the swipe
 onswipe = (transformation) => {
+
     if (typeof (closest.id) == 'number' && gamesession) {
         players[closest.id].unit_x = transformation.x / transformation.duration;
         players[closest.id].unit_y = transformation.y / transformation.duration;
     }
+
 }
 
 //the object that is closest to the touched area
@@ -58,28 +60,29 @@ ontouch = (first_x, first_y) => {
 
     //loop through the objects to find the closest to the touch area but should be within a reasonable radius
     for (let i = 0; i < players.length; i++) {
+        //check if the player belongs to the team whose turn it is
+        if (players[i].team == turn) {
+            //check if this player is close to the touched area
+            if (first_x + touch_allowance >= players[i].x - players[i].radius &&
+                first_y + touch_allowance >= players[i].y - players[i].radius &&
+                first_x - touch_allowance <= players[i].x + players[i].radius &&
+                first_y - touch_allowance <= players[i].y + players[i].radius) {
 
-        //check if this player is close to the touched area
-        if (first_x + touch_allowance >= players[i].x - players[i].radius &&
-            first_y + touch_allowance >= players[i].y - players[i].radius &&
-            first_x - touch_allowance <= players[i].x + players[i].radius &&
-            first_y - touch_allowance <= players[i].y + players[i].radius) {
+                //calculate closeness
+                let dx = first_x - players[i].x;
+                let dy = first_y - players[i].y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
 
-            //calculate closeness
-            let dx = first_x - players[i].x;
-            let dy = first_y - players[i].y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
-
-            //check if it is closer than the previously set
-            if (closest.dist == null) {
-                closest.id = i;
-                closest.dist = dist;
-            } else if (closest.dist > dist) {
-                closest.id = i;
-                closest.dist = dist;
+                //check if it is closer than the previously set
+                if (closest.dist == null) {
+                    closest.id = i;
+                    closest.dist = dist;
+                } else if (closest.dist > dist) {
+                    closest.id = i;
+                    closest.dist = dist;
+                }
             }
         }
-
     }
 
     //action on the object that is decided to be the one intended by the user
