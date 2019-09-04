@@ -184,21 +184,21 @@ config = () => {
     //turn indicators
     if (window.innerWidth > window.innerHeight) {
         //on laptops
-        turn_indicator.team_1.x = scores_display.x - 60;
+        turn_indicator.team_1.x = scores_display.x - 80;
         turn_indicator.team_1.y = scores_display.y - 15;
         turn_indicator.team_1.radius = 10;
     
-        turn_indicator.team_2.x = scores_display.x + 60;
+        turn_indicator.team_2.x = scores_display.x + 80;
         turn_indicator.team_2.y = scores_display.y - 15;
         turn_indicator.team_2.radius = 10;
     } else {
         //on smartphones
-        turn_indicator.team_1.x = scores_display.x + 20;
-        turn_indicator.team_1.y = -scores_display.y - 60;
+        turn_indicator.team_1.x = play_area.width + 10;
+        turn_indicator.team_1.y = (gamecanvas.height / 2) - 60;
         turn_indicator.team_1.radius = 10;
     
-        turn_indicator.team_2.x = scores_display.x + 20;
-        turn_indicator.team_2.y = -scores_display.y + 35;
+        turn_indicator.team_2.x = play_area.width + 10;
+        turn_indicator.team_2.y = (gamecanvas.height / 2) + 60;
         turn_indicator.team_2.radius = 10;
     }
     turn_indicator.team_1.color = team_1_color;
