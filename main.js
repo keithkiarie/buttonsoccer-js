@@ -221,8 +221,8 @@ function change_display(div_to_display) {
         }
     });
 
-    document.getElementById('main_menu').style.display == "none" ? in_main_menu = false : in_main_menu = true;
-    if (in_main_menu) {
+    document.getElementById('main_menu').style.display == "none" ? in_main_menu.home = false : in_main_menu.home = true;
+    if (in_main_menu.home) {
         draw_ui();
     }
 }

@@ -1,4 +1,13 @@
-let in_main_menu = true;
+//stores where exactly is being in the ui if not inside the gamesession
+let in_main_menu = {
+    home: true,
+    single_player: false,
+    two_player: false,
+    multiplayer: false,
+    tournament: false,
+    settings: false,
+    about: false
+};
 
 
 //creating the canvas for the user interface
@@ -15,7 +24,8 @@ document.getElementById("main_menu").appendChild(ui_canvas);
 let positions_before_swipe = [];
 
 function draw_ui() {
-    if (in_main_menu) {
+    //home menu
+    if (in_main_menu.home) {
         //draw the grass
         ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
 
@@ -79,15 +89,65 @@ function draw_ui() {
 
             } else {
                 //buttons that appear in all the pages of the UI
-
-                ui_ctx.drawImage(ui_buttons[i].img, ui_buttons[i].x, ui_buttons[i].y, ui_buttons[i].width, ui_buttons[i].height);
+                if (ui_buttons[i].name != 'back_button') {
+                    ui_ctx.drawImage(ui_buttons[i].img, ui_buttons[i].x, ui_buttons[i].y, ui_buttons[i].width, ui_buttons[i].height);
+                }
             }
         }
 
+    } else if (in_main_menu.single_player) {
+        //settings menu
 
-        //call the function again in the next frame
-        requestAnimationFrame(draw_ui);
+        //draw the grass
+        ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
+
+        //the back and fullscreen button
+        ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
+        ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+
+    } else if (in_main_menu.multiplayer) {
+        //settings menu
+
+        //draw the grass
+        ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
+
+        //the back and fullscreen button
+        ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
+        ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+
+    } else if (in_main_menu.tournament) {
+        //settings menu
+
+        //draw the grass
+        ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
+
+        //the back and fullscreen button
+        ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
+        ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+
+    } else if (in_main_menu.settings) {
+        //settings menu
+
+        //draw the grass
+        ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
+
+        //the back and fullscreen button
+        ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
+        ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+    } else if (in_main_menu.about) {
+        //settings menu
+
+        //draw the grass
+        ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
+
+        //the back and fullscreen button
+        ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
+        ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+
     }
+
+    //call the function again in the next frame
+    requestAnimationFrame(draw_ui);
 }
 
 draw_ui();

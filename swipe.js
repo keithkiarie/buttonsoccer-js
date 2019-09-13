@@ -174,16 +174,17 @@ function ui_touch_listener() {
 
 function ui_touch_stop() {
     positions_before_swipe = [];
+
     //look for a swipe, no swiping past the last and first page
     if (window.innerWidth > window.innerHeight) {
         //LAPTOP
 
-        if ((ui_current_x > ui_first_x + 5) && ui_page == 2) {
+        if ((ui_current_x > ui_first_x + 5) && ui_page == 2 && in_main_menu.home) {
             //right swipe
 
             ui_swiped = 'right'
             ui_page = 1;
-        } else if ((ui_current_x < ui_first_x - 5) && ui_page == 1) {
+        } else if ((ui_current_x < ui_first_x - 5) && ui_page == 1 && in_main_menu.home) {
             //left swipe
             ui_swiped = 'left';
             ui_page = 2;
@@ -194,11 +195,11 @@ function ui_touch_stop() {
     } else {
         //smartphone
 
-        if ((ui_current_y > ui_first_y + 5) && ui_page == 2) {
+        if ((ui_current_y > ui_first_y + 5) && ui_page == 2 && in_main_menu.home) {
             //right swipe
             ui_swiped = 'right';
             ui_page = 1;
-        } else if ((ui_current_y < ui_first_y - 5) && ui_page == 1) {
+        } else if ((ui_current_y < ui_first_y - 5) && ui_page == 1 && in_main_menu.home) {
             //left swipe
             ui_swiped = 'left';
             ui_page = 2;
@@ -206,7 +207,9 @@ function ui_touch_stop() {
             //tap
             ui_tap();
         }
+
     }
+
 }
 
 ui_touch_listener();
@@ -224,7 +227,8 @@ function ui_tap() {
 
             switch (ui_buttons[i].name) {
                 case "single_player":
-                    alert("Single Player Mode is still under development");
+                    in_main_menu.home = false;
+                    in_main_menu.single_player = true;
                     break;
 
                 case "two_player":
@@ -232,23 +236,50 @@ function ui_tap() {
                     break;
 
                 case "multiplayer":
-                    alert("Multiplayer Mode is still under development");
+                    in_main_menu.home = false;
+                    in_main_menu.multiplayer = true;
                     break;
 
                 case "tournament":
-                    alert("Tournament Mode is still under development");
+                    in_main_menu.home = false;
+                    in_main_menu.tournament = true;
                     break;
 
                 case "settings":
-                    alert("Settings menu is still under development");
+                    in_main_menu.home = false;
+                    in_main_menu.settings = true;
                     break;
 
                 case "about":
-                    alert("What do you want to know??");
+                    in_main_menu.home = false;
+                    in_main_menu.about = true;
                     break;
 
                 case "fullscreen":
                     openFullscreen(document.documentElement);
+                    break;
+
+                case "back_button":
+                    if (in_main_menu.single_player == true) {
+                        in_main_menu.single_player = false;
+                        in_main_menu.home = true;
+
+                    } else if (in_main_menu.multiplayer == true) {
+                        in_main_menu.multiplayer = false;
+                        in_main_menu.home = true;
+
+                    } else if (in_main_menu.tournament == true) {
+                        in_main_menu.tournament = false;
+                        in_main_menu.home = true;
+
+                    } else if (in_main_menu.settings == true) {
+                        in_main_menu.settings = false;
+                        in_main_menu.home = true;
+
+                    } else if (in_main_menu.about == true) {
+                        in_main_menu.about = false;
+                        in_main_menu.home = true;
+                    }
                     break;
 
                 default:

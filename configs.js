@@ -5,7 +5,7 @@ let team_2_color = "#0000FF";
 
 //turn taking during gameplay
 let turn = 1;
-let turn_duration = 2500;
+let turn_duration = 3000;
 //turn_indicator object manages the display indicator to show whose turn it is to play
 // more turn indicator to be found inside config() function
 let turn_indicator = {
@@ -187,7 +187,7 @@ config = () => {
         turn_indicator.team_1.x = scores_display.x - 80;
         turn_indicator.team_1.y = scores_display.y - 15;
         turn_indicator.team_1.radius = 10;
-    
+
         turn_indicator.team_2.x = scores_display.x + 80;
         turn_indicator.team_2.y = scores_display.y - 15;
         turn_indicator.team_2.radius = 10;
@@ -196,14 +196,14 @@ config = () => {
         turn_indicator.team_1.x = play_area.width + 10;
         turn_indicator.team_1.y = (gamecanvas.height / 2) - 60;
         turn_indicator.team_1.radius = 10;
-    
+
         turn_indicator.team_2.x = play_area.width + 10;
         turn_indicator.team_2.y = (gamecanvas.height / 2) + 60;
         turn_indicator.team_2.radius = 10;
     }
     turn_indicator.team_1.color = team_1_color;
     turn_indicator.team_2.color = team_2_color;
-    
+
 
     //back, pause, play and fullscreen buttons
     if (window.innerHeight > window.innerWidth) {
@@ -450,6 +450,14 @@ config = () => {
                 height: 30,
                 img: document.getElementById("fullscreen_button"),
                 page: "all",
+            },
+            back_button: {
+                x: 0,
+                y: window.innerHeight - 30,
+                width: 30,
+                height: 30,
+                img: document.getElementById("back_button"),
+                page: "all",
             }
         };
     } else {
@@ -602,6 +610,14 @@ config = () => {
                 height: 40,
                 img: document.getElementById("fullscreen_button_flipped"),
                 page: "all",
+            },
+            back_button: {
+                x: 0,
+                y: 0,
+                width: 40,
+                height: 40,
+                img: document.getElementById("back_button_flipped"),
+                page: "all",
             }
         };
     }
@@ -613,6 +629,7 @@ config = () => {
     ui_buttons.settings.name = "settings";
     ui_buttons.about.name = "about";
     ui_buttons.fullscreen.name = "fullscreen";
+    ui_buttons.back_button.name = "back_button";
 
 }
 
