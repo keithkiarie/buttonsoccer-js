@@ -134,6 +134,8 @@ function draw_ui() {
         //the back and fullscreen button
         ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
         ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+
+        settings_ui();
     } else if (in_main_menu.about) {
         //settings menu
 
@@ -151,3 +153,65 @@ function draw_ui() {
 }
 
 draw_ui();
+
+
+function settings_ui() {
+    ui_ctx.fillStyle = "black";
+    ui_ctx.font = "50px Arial";
+
+    if (window.innerWidth > window.innerHeight) {
+        //LAPTOPS
+
+        //draw centre line
+        ui_ctx.beginPath();
+        ui_ctx.moveTo(window.innerWidth / 2, 0);
+        ui_ctx.lineTo(window.innerWidth / 2, window.innerHeight);
+        ui_ctx.stroke();
+
+        ui_ctx.font = "40px Arial";
+
+        //Settings Menu
+        ui_ctx.fillText("Game Length", 10, 50);
+        ui_ctx.fillText("Turn-taking duration", 10, 100);
+        ui_ctx.fillText("Players Color", 10, 150);
+        ui_ctx.fillText("Theme Color", 10, 200);
+
+        //Options
+        ui_ctx.fillText("Game Length", window.innerWidth / 2, 50);
+
+        ui_ctx.font = "25px Comic Sans MS";
+        ui_ctx.fillText("30 seconds", window.innerWidth / 2 + 50, 80);
+        ui_ctx.fillText("60 seconds", window.innerWidth / 2 + 50, 110);
+        ui_ctx.fillText("90 seconds", window.innerWidth / 2 + 50, 140);
+        ui_ctx.fillText("120 seconds", window.innerWidth / 2 + 50, 170);
+    } else {
+        //SMARTPHONES
+        ui_ctx.save();
+        ui_ctx.rotate(90 * Math.PI / 180);
+
+        //draw centre line
+        ui_ctx.beginPath();
+        ui_ctx.moveTo(window.innerHeight / 2, -window.innerWidth);
+        ui_ctx.lineTo(window.innerHeight / 2, 0);
+        ui_ctx.stroke();
+
+        ui_ctx.font = "30px Arial";
+
+        //Settings Menu
+        ui_ctx.fillText("Game Length", 10, -window.innerWidth + 50);
+        ui_ctx.fillText("Turn-taking duration", 10, -window.innerWidth + 80);
+        ui_ctx.fillText("Players Color", 10, -window.innerWidth + 110);
+        ui_ctx.fillText("Theme Color", 10, -window.innerWidth + 140);
+
+        ui_ctx.fillText("Time", window.innerHeight / 2, -window.innerWidth + 50);
+        
+
+        ui_ctx.font = "15px Comic Sans MS";
+        ui_ctx.fillText("30 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 80);
+        ui_ctx.fillText("60 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 110);
+        ui_ctx.fillText("90 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 140);
+        ui_ctx.fillText("120 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 170);
+
+        ui_ctx.restore();
+    }
+}
