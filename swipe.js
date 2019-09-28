@@ -215,6 +215,7 @@ function ui_touch_stop() {
 ui_touch_listener();
 
 function ui_tap() {
+
     for (const i in ui_buttons) {
         //check if a button is being pressed
         if (//curcular buttons
@@ -227,32 +228,45 @@ function ui_tap() {
 
             switch (ui_buttons[i].name) {
                 case "single_player":
-                    in_main_menu.home = false;
-                    in_main_menu.single_player = true;
+                    if (in_main_menu.home) {
+                        in_main_menu.home = false;
+                        in_main_menu.single_player = true;
+                    }
                     break;
 
                 case "two_player":
-                    start_game();
+                    if (in_main_menu.home) {
+                        in_main_menu.home = false;
+                        in_main_menu.two_player = true;
+                    }
                     break;
 
                 case "multiplayer":
-                    in_main_menu.home = false;
-                    in_main_menu.multiplayer = true;
+                    if (in_main_menu.home) {
+                        in_main_menu.home = false;
+                        in_main_menu.multiplayer = true;
+                    }
                     break;
 
                 case "tournament":
-                    in_main_menu.home = false;
-                    in_main_menu.tournament = true;
+                    if (in_main_menu.home) {
+                        in_main_menu.home = false;
+                        in_main_menu.tournament = true;
+                    }
                     break;
 
                 case "settings":
-                    in_main_menu.home = false;
-                    in_main_menu.settings = true;
+                    if (in_main_menu.home) {
+                        in_main_menu.home = false;
+                        in_main_menu.settings = true;
+                    }
                     break;
 
                 case "about":
-                    in_main_menu.home = false;
-                    in_main_menu.about = true;
+                    if (in_main_menu.home) {
+                        in_main_menu.home = false;
+                        in_main_menu.about = true;
+                    }
                     break;
 
                 case "fullscreen":
@@ -262,6 +276,10 @@ function ui_tap() {
                 case "back_button":
                     if (in_main_menu.single_player == true) {
                         in_main_menu.single_player = false;
+                        in_main_menu.home = true;
+
+                    } else if (in_main_menu.two_player == true) {
+                        in_main_menu.two_player = false;
                         in_main_menu.home = true;
 
                     } else if (in_main_menu.multiplayer == true) {
@@ -287,6 +305,62 @@ function ui_tap() {
             }
             break;
         }
+    }
+
+    if (in_main_menu.two_player) {
+
+        if (window.innerWidth > window.innerHeight) {
+            //LAPTOPS
+
+            //check if a button in two_player menu is being tapped
+            for (const i in two_player_menu_btns) {
+
+                if (
+                    //square buttons
+                    (ui_first_x > two_player_menu_btns[i].x && ui_first_x < two_player_menu_btns[i].x + two_player_menu_btns[i].w &&
+                        ui_first_y > two_player_menu_btns[i].y && ui_first_y < two_player_menu_btns[i].y + two_player_menu_btns[i].h)) {
+
+                    for (const j in two_player_menu_btns) {
+                        two_player_menu_btns[j].elm = document.getElementById('radio_unchecked');
+                    }
+                    two_player_menu_btns[i].elm = document.getElementById('radio_checked');
+                }
+            }
+
+            //start game button
+            if ((ui_first_x > two_player_start_game_btn.x && ui_first_x < two_player_start_game_btn.x + two_player_start_game_btn.w &&
+                ui_first_y > two_player_start_game_btn.y && ui_first_y < two_player_start_game_btn.y + two_player_start_game_btn.h)) {
+
+                start_game();
+            }
+
+        } else {
+            //SMARTPHONES
+
+
+            //check if a button in two_player menu is being tapped
+            for (const i in two_player_menu_btns) {
+
+                if (
+                    //square buttons
+                    ui_first_x > -two_player_menu_btns[i].y - two_player_menu_btns[i].h && ui_first_x < -two_player_menu_btns[i].y &&
+                    ui_first_y > two_player_menu_btns[i].x && ui_first_y < two_player_menu_btns[i].x + two_player_menu_btns[i].w) {
+
+                    for (const j in two_player_menu_btns) {
+                        two_player_menu_btns[j].elm = document.getElementById('radio_unchecked');
+                    }
+                    two_player_menu_btns[i].elm = document.getElementById('radio_checked');
+                }
+            }
+
+            //start game button
+            if (ui_first_x > -two_player_start_game_btn.y - two_player_start_game_btn.h && ui_first_x < -two_player_start_game_btn.y &&
+                ui_first_y > two_player_start_game_btn.x && ui_first_y < two_player_start_game_btn.x + two_player_start_game_btn.w) {
+
+                start_game();
+            }
+        }
+
     }
 
 }

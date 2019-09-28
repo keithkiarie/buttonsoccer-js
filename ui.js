@@ -9,6 +9,119 @@ let in_main_menu = {
     about: false
 };
 
+let two_player_menu_btns;
+if (window.innerWidth > window.innerHeight) {
+    //LAPTOPS
+
+    two_player_menu_btns = {
+        "30_seconds": {
+            x: 15,
+            y: 60,
+            w: 20,
+            h: 20,
+        },
+        "60_seconds": {
+            x: 15,
+            y: 90,
+            w: 20,
+            h: 20,
+        },
+        "90_seconds": {
+            x: 15,
+            y: 120,
+            w: 20,
+            h: 20,
+        },
+        "120_seconds": {
+            x: 15,
+            y: 150,
+            w: 20,
+            h: 20,
+        },
+        "3_goals": {
+            x: 15,
+            y: 190,
+            w: 20,
+            h: 20,
+        },
+        "5_goals": {
+            x: 15,
+            y: 220,
+            w: 20,
+            h: 20,
+        },
+        "10_goals": {
+            x: 15,
+            y: 250,
+            w: 20,
+            h: 20,
+        }
+    }
+} else {
+    //SMARTPHONES
+
+    two_player_menu_btns = {
+        "30_seconds": {
+            x: 25,
+            y: -window.innerWidth + 70,
+            w: 10,
+            h: 10,
+        },
+        "60_seconds": {
+            x: 25,
+            y: -window.innerWidth + 90,
+            w: 10,
+            h: 10,
+        },
+        "90_seconds": {
+            x: 25,
+            y: -window.innerWidth + 110,
+            w: 10,
+            h: 10,
+        },
+        "120_seconds": {
+            x: 25,
+            y: -window.innerWidth + 130,
+            w: 10,
+            h: 10,
+        },
+        "3_goals": {
+            x: 25,
+            y: -window.innerWidth + 160,
+            w: 10,
+            h: 10,
+        },
+        "5_goals": {
+            x: 25,
+            y: -window.innerWidth + 180,
+            w: 10,
+            h: 10,
+        },
+        "10_goals": {
+            x: 25,
+            y: -window.innerWidth + 200,
+            w: 10,
+            h: 10,
+        }
+    }
+}
+
+two_player_menu_btns['30_seconds'].name = '30_seconds';
+two_player_menu_btns['60_seconds'].name = '60_seconds';
+two_player_menu_btns['90_seconds'].name = '90_seconds';
+two_player_menu_btns['120_seconds'].name = '120_seconds';
+two_player_menu_btns['3_goals'].name = '3_goals';
+two_player_menu_btns['5_goals'].name = '5_goals';
+two_player_menu_btns['10_goals'].name = '10_goals';
+
+two_player_menu_btns['30_seconds'].elm = document.getElementById('radio_unchecked');
+two_player_menu_btns['60_seconds'].elm = document.getElementById('radio_checked');
+two_player_menu_btns['90_seconds'].elm = document.getElementById('radio_unchecked');
+two_player_menu_btns['120_seconds'].elm = document.getElementById('radio_unchecked');
+two_player_menu_btns['3_goals'].elm = document.getElementById('radio_unchecked');
+two_player_menu_btns['5_goals'].elm = document.getElementById('radio_unchecked');
+two_player_menu_btns['10_goals'].elm = document.getElementById('radio_unchecked');
+
 
 //creating the canvas for the user interface
 ui_canvas = document.createElement("canvas");
@@ -105,6 +218,16 @@ function draw_ui() {
         ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
         ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
 
+    } else if (in_main_menu.two_player) {
+        //draw the grass
+        ui_ctx.drawImage(document.getElementById("ui_grass"), 0, 0, window.innerWidth, window.innerHeight);
+
+        //the back and fullscreen button
+        ui_ctx.drawImage(ui_buttons.fullscreen.img, ui_buttons.fullscreen.x, ui_buttons.fullscreen.y, ui_buttons.fullscreen.width, ui_buttons.fullscreen.height);
+        ui_ctx.drawImage(ui_buttons.back_button.img, ui_buttons.back_button.x, ui_buttons.back_button.y, ui_buttons.back_button.width, ui_buttons.back_button.height);
+
+        two_player_menu();
+
     } else if (in_main_menu.multiplayer) {
         //settings menu
 
@@ -156,62 +279,105 @@ draw_ui();
 
 
 function settings_ui() {
+    //setting interface
+}
+
+let two_player_start_game_btn;
+
+if (window.innerWidth > window.innerHeight) {
+    two_player_start_game_btn = {
+        x: window.innerWidth - 310,
+        y: window.innerHeight - 160,
+        w: 220,
+        h: 50
+    };
+} else {
+    two_player_start_game_btn = {
+        x: window.innerHeight - 215,
+        y: -110,
+        w: 150,
+        h: 50
+    }
+}
+
+
+function two_player_menu() {
     ui_ctx.fillStyle = "black";
     ui_ctx.font = "50px Arial";
 
     if (window.innerWidth > window.innerHeight) {
         //LAPTOPS
 
-        //draw centre line
-        ui_ctx.beginPath();
-        ui_ctx.moveTo(window.innerWidth / 2, 0);
-        ui_ctx.lineTo(window.innerWidth / 2, window.innerHeight);
-        ui_ctx.stroke();
-
         ui_ctx.font = "40px Arial";
 
-        //Settings Menu
+        //Game Length Menu
         ui_ctx.fillText("Game Length", 10, 50);
-        ui_ctx.fillText("Turn-taking duration", 10, 100);
-        ui_ctx.fillText("Players Color", 10, 150);
-        ui_ctx.fillText("Theme Color", 10, 200);
+
+
+
+        for (const btn in two_player_menu_btns) {
+            ui_ctx.drawImage(two_player_menu_btns[btn].elm, two_player_menu_btns[btn].x, two_player_menu_btns[btn].y, two_player_menu_btns[btn].w, two_player_menu_btns[btn].h);
+        }
+
+        //Start Game button
+        ui_ctx.fillStyle = "blue";
+        ui_ctx.fillRect(two_player_start_game_btn.x, two_player_start_game_btn.y, two_player_start_game_btn.w, two_player_start_game_btn.h);
+
+        ui_ctx.font = "40px Arial";
+        ui_ctx.fillStyle = "black";
+        ui_ctx.fillText("Start Game", window.innerWidth - 300, window.innerHeight - 120);
+
 
         //Options
-        ui_ctx.fillText("Game Length", window.innerWidth / 2, 50);
-
         ui_ctx.font = "25px Comic Sans MS";
-        ui_ctx.fillText("30 seconds", window.innerWidth / 2 + 50, 80);
-        ui_ctx.fillText("60 seconds", window.innerWidth / 2 + 50, 110);
-        ui_ctx.fillText("90 seconds", window.innerWidth / 2 + 50, 140);
-        ui_ctx.fillText("120 seconds", window.innerWidth / 2 + 50, 170);
+
+        //Select time
+        ui_ctx.fillText("30 seconds", 45, 80);
+        ui_ctx.fillText("60 seconds", 45, 110);
+        ui_ctx.fillText("90 seconds", 45, 140);
+        ui_ctx.fillText("120 seconds", 45, 170);
+        ui_ctx.fillText("3 goals", 45, 210);
+        ui_ctx.fillText("5 goals", 45, 240);
+        ui_ctx.fillText("10 goals", 45, 270);
+
     } else {
         //SMARTPHONES
         ui_ctx.save();
         ui_ctx.rotate(90 * Math.PI / 180);
 
-        //draw centre line
-        ui_ctx.beginPath();
-        ui_ctx.moveTo(window.innerHeight / 2, -window.innerWidth);
-        ui_ctx.lineTo(window.innerHeight / 2, 0);
-        ui_ctx.stroke();
-
         ui_ctx.font = "30px Arial";
 
         //Settings Menu
         ui_ctx.fillText("Game Length", 10, -window.innerWidth + 50);
-        ui_ctx.fillText("Turn-taking duration", 10, -window.innerWidth + 80);
-        ui_ctx.fillText("Players Color", 10, -window.innerWidth + 110);
-        ui_ctx.fillText("Theme Color", 10, -window.innerWidth + 140);
 
-        ui_ctx.fillText("Time", window.innerHeight / 2, -window.innerWidth + 50);
-        
 
+        for (const btn in two_player_menu_btns) {
+            ui_ctx.drawImage(two_player_menu_btns[btn].elm, two_player_menu_btns[btn].x, two_player_menu_btns[btn].y, two_player_menu_btns[btn].w, two_player_menu_btns[btn].h);
+        }
+
+        //Start Game button
+        ui_ctx.fillStyle = "blue";
+        ui_ctx.fillRect(two_player_start_game_btn.x, two_player_start_game_btn.y, two_player_start_game_btn.w, two_player_start_game_btn.h);
+
+        ui_ctx.font = "25px Arial";
+        ui_ctx.fillStyle = "black";
+        ui_ctx.fillText("Start Game", window.innerHeight - 200, -80);
+
+
+        //Time options
         ui_ctx.font = "15px Comic Sans MS";
-        ui_ctx.fillText("30 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 80);
-        ui_ctx.fillText("60 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 110);
-        ui_ctx.fillText("90 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 140);
-        ui_ctx.fillText("120 seconds", window.innerHeight / 2 + 50, -window.innerWidth + 170);
+
+        ui_ctx.fillText("30 seconds", 40, -window.innerWidth + 80);
+        ui_ctx.fillText("60 seconds", 40, -window.innerWidth + 100);
+        ui_ctx.fillText("90 seconds", 40, -window.innerWidth + 120);
+        ui_ctx.fillText("120 seconds", 40, -window.innerWidth + 140);
+        ui_ctx.fillText("3 goals", 40, -window.innerWidth + 170);
+        ui_ctx.fillText("5 goals", 40, -window.innerWidth + 190);
+        ui_ctx.fillText("10 goals", 40, -window.innerWidth + 210);
 
         ui_ctx.restore();
     }
+
+    //in_main_menu.two_player = false;
+    //start_game();
 }
