@@ -324,6 +324,7 @@ function ui_tap() {
                         two_player_menu_btns[j].elm = document.getElementById('radio_unchecked');
                     }
                     two_player_menu_btns[i].elm = document.getElementById('radio_checked');
+                    game_duration_selected = two_player_menu_btns[i].name;
                 }
             }
 
@@ -350,6 +351,7 @@ function ui_tap() {
                         two_player_menu_btns[j].elm = document.getElementById('radio_unchecked');
                     }
                     two_player_menu_btns[i].elm = document.getElementById('radio_checked');
+                    game_duration_selected = two_player_menu_btns[i].name;
                 }
             }
 
@@ -361,6 +363,25 @@ function ui_tap() {
             }
         }
 
+        switch (game_duration_selected) {
+            case "30_seconds":
+                game_duration = 30;
+                break;
+
+            case "60_seconds":
+                game_duration = 60;
+                break;
+
+            case "90_seconds":
+                game_duration = 90;
+                break;
+
+            case "120_seconds":
+                game_duration = 120;
+                break;
+            default:
+                break;
+        }
     }
 
 }

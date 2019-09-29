@@ -9,6 +9,7 @@ let in_main_menu = {
     about: false
 };
 
+let game_duration_selected;
 let two_player_menu_btns;
 if (window.innerWidth > window.innerHeight) {
     //LAPTOPS
