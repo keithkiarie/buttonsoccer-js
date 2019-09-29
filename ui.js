@@ -326,7 +326,7 @@ function two_player_menu() {
 
         ui_ctx.font = "40px Arial";
         ui_ctx.fillStyle = "black";
-        ui_ctx.fillText("Start Game", window.innerWidth - 300, window.innerHeight - 120);
+        ui_ctx.fillText("Start Game", two_player_start_game_btn.x + 10, two_player_start_game_btn.y + 40);
 
 
         //Options
@@ -362,7 +362,7 @@ function two_player_menu() {
 
         ui_ctx.font = "25px Arial";
         ui_ctx.fillStyle = "black";
-        ui_ctx.fillText("Start Game", window.innerHeight - 200, -80);
+        ui_ctx.fillText("Start Game", two_player_start_game_btn.x + 15, two_player_start_game_btn.y + 30);
 
 
         //Time options
