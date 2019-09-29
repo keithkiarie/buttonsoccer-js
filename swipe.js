@@ -317,7 +317,7 @@ function ui_tap() {
 
                 if (
                     //square buttons
-                    (ui_first_x > two_player_menu_btns[i].x && ui_first_x < two_player_menu_btns[i].x + two_player_menu_btns[i].w &&
+                    (ui_first_x > two_player_menu_btns[i].x && ui_first_x < two_player_menu_btns[i].x + (two_player_menu_btns[i].w * 9) &&
                         ui_first_y > two_player_menu_btns[i].y && ui_first_y < two_player_menu_btns[i].y + two_player_menu_btns[i].h)) {
 
                     for (const j in two_player_menu_btns) {
@@ -345,7 +345,7 @@ function ui_tap() {
                 if (
                     //square buttons
                     ui_first_x > -two_player_menu_btns[i].y - two_player_menu_btns[i].h && ui_first_x < -two_player_menu_btns[i].y &&
-                    ui_first_y > two_player_menu_btns[i].x && ui_first_y < two_player_menu_btns[i].x + two_player_menu_btns[i].w) {
+                    ui_first_y > two_player_menu_btns[i].x && ui_first_y < two_player_menu_btns[i].x + (two_player_menu_btns[i].w * 10)) {
 
                     for (const j in two_player_menu_btns) {
                         two_player_menu_btns[j].elm = document.getElementById('radio_unchecked');
