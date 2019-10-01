@@ -39,6 +39,7 @@ ontouch = (first_x, first_y) => {
             if (buttons[i].name == 'play_button' && !gamesession) {
                 gamesession = true;
                 gameplay();
+                turn_taking();
                 break;
             }
 
