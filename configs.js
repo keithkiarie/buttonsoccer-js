@@ -13,7 +13,7 @@ let turn_indicator = {
     team_2: {}
 };
 
-
+let game_mode = 'time'; //either time or goals
 let game_duration = 60; //number of seconds a match lasts
 
 let player_friction = 0.995;
