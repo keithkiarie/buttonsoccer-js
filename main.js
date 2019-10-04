@@ -182,7 +182,11 @@ function start_game() {
 
     turn_taking(); //defined in player.js
     game_time_counter = 0;
-    time_keeper();
+
+    if (game_mode == 'time') {
+        time_keeper();
+    }
+
     requestAnimationFrame(gameplay);
 }
 
@@ -273,6 +277,17 @@ function score_keeper(scorer) {
         ctx.fillText(`${home_score} - ${away_score}`, scores_display.x, scores_display.y);
         ctx.restore();
     }
+
+    if (game_mode == 'goals' && gamesession) {
+        if (home_score == game_duration || away_score == game_duration) {
+            gamesession = false;
+
+            setTimeout(function () {
+                document.getElementById("game_div").removeChild(gamecanvas);
+                change_display("main_menu");
+            }, 1000);
+        }
+    }
 }
 
 
@@ -298,38 +313,59 @@ let time_keeper = () => {
 function time_displayer() {
     let color;
 
-    //change color according to the time remaining
-    remaining_time < 10 ? color = time_display.time_up_color : color = time_display.color;
+    if (game_mode == 'time') {
+        //change color according to the time remaining
+        remaining_time < 10 ? color = time_display.time_up_color : color = time_display.color;
 
-    //display the scores
-    ctx.font = time_display.font;
-    ctx.fillStyle = color;
-    ctx.textAlign = "center";
 
-    if (remaining_time == 0) {
-        //if time's up
-        time_up();
+        //display the scores
+        ctx.font = time_display.font;
+        ctx.fillStyle = color;
+        ctx.textAlign = "center";
 
-    } else {
-        //if there is still time remaining
-        let minutes = Math.floor(remaining_time / 60).toFixed(0);
-        let seconds = remaining_time % 60;
+        if (remaining_time == 0) {
+            //if time's up
+            time_up();
 
-        //display time as two digits
-        seconds < 10 ? seconds = '0' + seconds : seconds = String(seconds);
+        } else {
+            //if there is still time remaining
+            let minutes = Math.floor(remaining_time / 60).toFixed(0);
+            let seconds = remaining_time % 60;
+
+            //display time as two digits
+            seconds < 10 ? seconds = '0' + seconds : seconds = String(seconds);
+
+            if (window.innerWidth > window.innerHeight) {
+                //on laptops
+                ctx.fillText(`${minutes} : ${seconds}`, time_display.x, time_display.y);
+
+            } else {
+                //on smartphone (potrait displays)
+                ctx.save();
+                ctx.rotate(90 * Math.PI / 180);
+                ctx.fillText(`${minutes} : ${seconds}`, time_display.x, time_display.y);
+                ctx.restore();
+            }
+        }
+
+    } else if (game_mode == 'goals') {
+        ctx.font = time_display.font;
+        ctx.fillStyle = color;
+        ctx.textAlign = "center";
 
         if (window.innerWidth > window.innerHeight) {
             //on laptops
-            ctx.fillText(`${minutes} : ${seconds}`, time_display.x, time_display.y);
+            ctx.fillText(`First to ${game_duration} goals`, time_display.x, time_display.y);
 
         } else {
             //on smartphone (potrait displays)
             ctx.save();
             ctx.rotate(90 * Math.PI / 180);
-            ctx.fillText(`${minutes} : ${seconds}`, time_display.x, time_display.y);
+            ctx.fillText(`First to ${game_duration} goals`, time_display.x, time_display.y);
             ctx.restore();
         }
     }
+
 }
 
 
