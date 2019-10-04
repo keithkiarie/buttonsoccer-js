@@ -365,20 +365,40 @@ function ui_tap() {
         }
 
         switch (game_duration_selected) {
+            //time
             case "30_seconds":
+                game_mode = 'time';
                 game_duration = 30;
                 break;
 
             case "60_seconds":
+                game_mode = 'time';
                 game_duration = 60;
                 break;
 
             case "90_seconds":
+                game_mode = 'time';
                 game_duration = 90;
                 break;
 
             case "120_seconds":
+                game_mode = 'time';
                 game_duration = 120;
+                break;
+            //goals
+            case "3_goals":
+                game_mode = 'goals';
+                game_duration = 3;
+                break;
+
+            case "5_goals":
+                game_mode = 'goals';
+                game_duration = 5;
+                break;
+
+            case "10_goals":
+                game_mode = 'goals';
+                game_duration = 10;
                 break;
             default:
                 break;
