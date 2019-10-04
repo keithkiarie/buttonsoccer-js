@@ -90,6 +90,8 @@ ontouch = (first_x, first_y) => {
     if (typeof (closest.id) == 'number' && gamesession) {
         players[closest.id].unit_x = 0;
         players[closest.id].unit_y = 0;
+        turn_taking('played');
+        
     }
 }
 

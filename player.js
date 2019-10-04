@@ -278,17 +278,27 @@ function player_movement() {
 }
 
 //switches the turn to play between the two teams every after a set duration
-function turn_taking() {
+let turn_taking_timeout;
+function turn_taking(event) {
     //if the game is being played
     if (gamesession) {
-        setTimeout(function () {
+        if (event == 'played') {
+            clearTimeout(turn_taking_timeout);
             if (turn == 1) {
                 turn = 2;
             } else {
                 turn = 1;
             }
-            
-            turn_taking();
+        }
+
+        turn_taking_timeout = setTimeout(function () {
+            if (turn == 1) {
+                turn = 2;
+            } else {
+                turn = 1;
+            }
+
+            turn_taking('timeout');
         }, turn_duration);
     }
 }
