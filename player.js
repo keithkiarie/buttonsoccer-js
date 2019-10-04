@@ -289,6 +289,12 @@ function turn_taking(event) {
             } else {
                 turn = 1;
             }
+        } else if (event == 'home score') {
+            clearTimeout(turn_taking_timeout);
+            turn = 2;
+        } else if (event == 'away score') {
+            clearTimeout(turn_taking_timeout);
+            turn = 1;
         }
 
         turn_taking_timeout = setTimeout(function () {

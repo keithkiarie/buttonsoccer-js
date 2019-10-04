@@ -257,8 +257,10 @@ function score_keeper(scorer) {
     //check who has scored
     if (scorer == 'home') {
         home_score++;
+        turn_taking('home score')
     } else if (scorer == 'away') {
         away_score++;
+        turn_taking('away score');
     }
 
     //display the scores
