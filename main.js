@@ -131,6 +131,15 @@ function circle_drawer() {
         ctx.stroke();
         ctx.fillStyle = players[i].color;
         ctx.fill();
+
+        //draw a white circle on the currently active team
+        if (players[i].team == turn) {
+            ctx.beginPath();
+            ctx.arc(players[i].x, players[i].y, players[i].radius / 2, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
     }
 
     //ball spinning mechanism, DISABLED
