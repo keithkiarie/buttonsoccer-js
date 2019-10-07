@@ -90,7 +90,6 @@ ontouch = (first_x, first_y) => {
     if (typeof (closest.id) == 'number' && gamesession) {
         players[closest.id].unit_x = 0;
         players[closest.id].unit_y = 0;
-        turn_taking('played');
         
     }
 }
@@ -134,6 +133,7 @@ function Swipe_Listener(swiping_area) {
 
     //touch has ended
     this.touch_stop = () => {
+        turn_taking('played');
 
         obj.duration = touch_duration;
 
