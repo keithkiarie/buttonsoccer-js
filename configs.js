@@ -20,7 +20,7 @@ let player_friction = 0.995;
 let ball_friction = 0.999;
 
 let speed = 12;
-let ball_id = ["ball_1", "ball_2", "ball_3", "ball_4", "ball_5"];
+let ball_id = ["ball_1"];
 
 let ball_grease = 5; //smoothens ball movement
 
