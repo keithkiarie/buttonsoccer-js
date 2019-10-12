@@ -232,8 +232,9 @@ function ui_tap() {
             switch (ui_buttons[i].name) {
                 case "single_player":
                     if (in_main_menu.home) {
-                        in_main_menu.home = false;
-                        in_main_menu.single_player = true;
+                        alert("Only Two Player Mode is currently available");
+                        // in_main_menu.home = false;
+                        // in_main_menu.single_player = true;
                     }
                     break;
 
@@ -246,29 +247,33 @@ function ui_tap() {
 
                 case "multiplayer":
                     if (in_main_menu.home) {
-                        in_main_menu.home = false;
-                        in_main_menu.multiplayer = true;
+                        alert("Only Two Player Mode is currently available");
+                        // in_main_menu.home = false;
+                        // in_main_menu.multiplayer = true;
                     }
                     break;
 
                 case "tournament":
                     if (in_main_menu.home) {
-                        in_main_menu.home = false;
-                        in_main_menu.tournament = true;
+                        alert("Only Two Player Mode is currently available");
+                        // in_main_menu.home = false;
+                        // in_main_menu.tournament = true;
                     }
                     break;
 
                 case "settings":
                     if (in_main_menu.home) {
-                        in_main_menu.home = false;
-                        in_main_menu.settings = true;
+                        alert("Only Two Player Mode is currently available");
+                        // in_main_menu.home = false;
+                        // in_main_menu.settings = true;
                     }
                     break;
 
                 case "about":
                     if (in_main_menu.home) {
-                        in_main_menu.home = false;
-                        in_main_menu.about = true;
+                        alert("Only Two Player Mode is currently available");
+                        // in_main_menu.home = false;
+                        // in_main_menu.about = true;
                     }
                     break;
 
