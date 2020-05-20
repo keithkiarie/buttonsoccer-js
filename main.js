@@ -358,6 +358,8 @@ function time_displayer() {
         ctx.fillStyle = color;
         ctx.textAlign = "center";
 
+        if (remaining_time == 1) FinalWhistle.play(); //blow the final whistle
+
         if (remaining_time == 0) {
             //if time's up
             time_up();
@@ -406,7 +408,6 @@ function time_displayer() {
 
 //gets called when the given time for a match has elapsed
 function time_up() {
-
 
     if (window.innerWidth > window.innerHeight) {
         //on laptops
