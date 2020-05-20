@@ -17,7 +17,6 @@
         canvas {
             touch-action: none;
         }
-
     </style>
 </head>
 
@@ -36,7 +35,7 @@
 
     <div id="images_loader" style="display:none;">
         <img id="ball_1" width="100" height="100" src="images/balls/ball1/1.png" alt="Ball 1">
-       
+
 
         <img id="grass" width="50" height="50" src="images/grass/grass.jpg" alt="Grass">
         <img id="pitch" width="50" height="50" src="images/grass/pitch.png" alt="Pitch">
@@ -67,7 +66,13 @@
         <img id="play_button_flipped" width="50" height="50" src="images/buttons/play_button_flipped.png" alt="Play">
         <img id="fullscreen_button_flipped" width="50" height="50" src="images/buttons/fullscreen_button_flipped.jpg"
             alt="Full Screen">
+
+        <audio src="audio/cheer_normal.m4a" id="cheering_audio">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
     </div>
+
 
     <script>
         //object for the canvas of the user interface
@@ -97,6 +102,9 @@
 
         let ui_swiped = false; //if the ui has been swiped and the buttons animation should happen
         let ui_page = 1; //the currently displayed page of the UI
+
+        let CheerAudio = document.getElementById("cheering_audio");
+        let CurrentAudio = CheerAudio;
     </script>
 
     <script src="configs.js"></script>

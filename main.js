@@ -196,6 +196,10 @@ function start_game() {
         time_keeper();
     }
 
+    //play Cheering audio
+    CurrentAudio = CheerAudio;
+    CurrentAudio.play();
+
     requestAnimationFrame(gameplay);
 }
 
@@ -208,6 +212,7 @@ function gameplay() {
     time_displayer();
 
     if (gamesession) {
+        if (CurrentAudio.paused) CurrentAudio.play();
         //increase the value of the counter
         game_time_counter++;
 
@@ -219,6 +224,9 @@ function gameplay() {
         }
 
         requestAnimationFrame(gameplay);
+    } else {
+        //If game is paused, pause the audio
+        CurrentAudio.pause();
     }
     score_keeper();
 }
