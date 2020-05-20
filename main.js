@@ -254,6 +254,7 @@ function goal() {
     //Fans celebrating
     CurrentAudio.pause();
     CurrentAudio = CheeringGoal;
+    CurrentAudio.currentTime = 0;
     CurrentAudio.play();
 
     //take the ball back to the center
@@ -276,7 +277,7 @@ function goal() {
         CurrentAudio.pause();
         CurrentAudio = CheeringNormal;
         CurrentAudio.play();
-    }, 6000);
+    }, 16000);
 
 
 }
