@@ -67,7 +67,11 @@
         <img id="fullscreen_button_flipped" width="50" height="50" src="images/buttons/fullscreen_button_flipped.jpg"
             alt="Full Screen">
 
-        <audio src="audio/cheer_normal.m4a" id="cheering_audio">
+        <audio src="audio/cheer_normal.m4a" id="cheering_normal">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+        <audio src="audio/cheer_goal.m4a" id="cheering_goal">
             Your browser does not support the
             <code>audio</code> element.
         </audio>
@@ -103,8 +107,9 @@
         let ui_swiped = false; //if the ui has been swiped and the buttons animation should happen
         let ui_page = 1; //the currently displayed page of the UI
 
-        let CheerAudio = document.getElementById("cheering_audio");
-        let CurrentAudio = CheerAudio;
+        let CheeringNormal = document.getElementById("cheering_normal");
+        let CheeringGoal = document.getElementById("cheering_goal");
+        let CurrentAudio = CheeringNormal;
     </script>
 
     <script src="configs.js"></script>

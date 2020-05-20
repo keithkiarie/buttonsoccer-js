@@ -197,7 +197,7 @@ function start_game() {
     }
 
     //play Cheering audio
-    CurrentAudio = CheerAudio;
+    CurrentAudio = CheeringNormal;
     CurrentAudio.play();
 
     requestAnimationFrame(gameplay);
@@ -251,6 +251,11 @@ function change_display(div_to_display) {
 //a goal has been scored
 function goal() {
 
+    //Fans celebrating
+    CurrentAudio.pause();
+    CurrentAudio = CheeringGoal;
+    CurrentAudio.play();
+
     //take the ball back to the center
     ball.x = ball_initial_position.x;
     ball.y = ball_initial_position.y;
@@ -264,6 +269,16 @@ function goal() {
         player.unit_x = 0;
         player.unit_y = 0;
     });
+
+
+
+    setTimeout(() => {
+        CurrentAudio.pause();
+        CurrentAudio = CheeringNormal;
+        CurrentAudio.play();
+    }, 6000);
+
+
 }
 
 //keeps track of the score in the game
